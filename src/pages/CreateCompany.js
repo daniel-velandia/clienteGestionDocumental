@@ -5,12 +5,13 @@ import { Alert, Col, Container, Row } from "react-bootstrap";
 import { CREATE_COMPANY_POST_ENDPOINT } from "../connections/helpers/endpoints";
 import { CreateCompanyForm } from "../components/CreateCompanyForm";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
+import { CreateCompanyApi } from "../FakeApi/company";
 
 function CreateCompany() {
 
     const [errors, setErrors] = useState({});
 
-    const create = async ({companyName, nit, email, phone, assistantName}) => {
+    async function create({companyName, nit, email, phone, assistantName}) {
 
         const error = {};
 
@@ -37,15 +38,7 @@ function CreateCompany() {
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-
-            console.log({companyName, nit, email, phone, assistantName});
-
-            // axios.post(CREATE_COMPANY_POST_ENDPOINT, {companyName, nit, email, phone, assistentName})
-            // .then( response => {
-            //     
-            // }).catch( err => {
-            //     setErrors({new: err.response.data.message})
-            // });
+            CreateCompanyApi({companyName, nit, email, phone, assistantName});
         }
     };
 
@@ -54,6 +47,7 @@ function CreateCompany() {
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
                     {errors.new && <Alert variant="danger">{errors.new}</Alert>}
+                    <h2 className="my-3 text-center">Crear empresa</h2>
                     <CreateCompanyForm errors={errors} callback={create} />
                 </Col>
             </Row>

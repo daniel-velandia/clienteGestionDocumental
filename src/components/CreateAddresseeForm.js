@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
 
-function CreateManagerForm({errors, callback}) {
+function CreateAddresseeForm({errors, callback}) {
 
     const [identification, setIdentification] = useState("");
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [charge, setCharge] = useState("");
@@ -14,7 +13,7 @@ function CreateManagerForm({errors, callback}) {
 
     const send = (e) => {
         e.preventDefault();
-        callback({identification, name, lastName, username, email, phone, charge, area});
+        callback({identification, name, lastName, email, phone, charge, area});
     }
 
     return (
@@ -65,22 +64,6 @@ function CreateManagerForm({errors, callback}) {
                             isInvalid={errors.lastName} />
                         <Form.Control.Feedback type="invalid">
                             {errors.lastName}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="username"
-                        label="Username"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="Username"
-                            type="text"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                            isInvalid={errors.username} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.username}
                         </Form.Control.Feedback>
                     </FloatingLabel>
                 </Col>
@@ -148,9 +131,9 @@ function CreateManagerForm({errors, callback}) {
                         </Form.Control.Feedback>
                     </FloatingLabel>
                 </Col>
-                <Col xs="12" className="d-flex justify-content-center">
-                    <Button type="submit" variant="primary" className="mt-3">
-                        Crear encargado
+                <Col sm="12">
+                    <Button type="submit" className="mt-3 my-color my-border-none p-3 w-100">
+                        Crear destinatario
                     </Button>
                 </Col>
             </Row>
@@ -158,4 +141,4 @@ function CreateManagerForm({errors, callback}) {
     );
 }
 
-export { CreateManagerForm };
+export { CreateAddresseeForm };

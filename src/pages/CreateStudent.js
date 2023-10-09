@@ -4,13 +4,14 @@ import { useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import { CREATE_STUDENT_POST_ENDPOINT } from "../connections/helpers/endpoints";
 import { CreateStudentForm } from "../components/CreateStudentForm";
+import { CreateStudentApi } from "../FakeApi/student";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
 
 function CreateStudent() {
 
     const [errors, setErrors] = useState({});
 
-    const create = async ({identification, name, lastName, username, email, phone, career, semester}) => {
+    async function create({identification, name, lastName, email, phone, career, semester}) {
 
         const error = {};
 
@@ -24,10 +25,6 @@ function CreateStudent() {
 
         if(validator.isEmpty(lastName)) {
             error.lastName = "El apellido no puede estar vacio"
-        }
-
-        if(validator.isEmpty(username)) {
-            error.username = "El username no puede estar vacio"
         }
 
         if(validator.isEmpty(email)) {
@@ -49,15 +46,7 @@ function CreateStudent() {
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-
-            console.log({identification, name, lastName, username, email, phone, career, semester});
-    
-            // axios.post(CREATE_STUDENT_POST_ENDPOINT, {identification, name, lastName, username, email, phone, career, semester})
-            // .then( response => {
-            //     
-            // }).catch( err => {
-            //     setErrors({new: err.response.data.message})
-            // });
+            CreateStudentApi({identification, name, lastName, email, phone, career, semester});
         }
     };
 
@@ -66,6 +55,7 @@ function CreateStudent() {
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
                     {errors.new && <Alert variant="danger">{errors.new}</Alert>}
+                    <h2 className="my-3 text-center">Crear estudiante</h2>
                     <CreateStudentForm errors={errors} callback={create} />
                 </Col>
             </Row>

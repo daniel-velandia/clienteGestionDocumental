@@ -97,8 +97,8 @@ function CreateCompanyForm({errors, callback}) {
                         </Form.Control.Feedback>
                     </FloatingLabel>
                 </Col>
-                <Col xs="12" className="d-flex justify-content-center">
-                    <Button type="submit" variant="primary" className="mt-3">
+                <Col sm="12">
+                    <Button type="submit" className="mt-3 my-color my-border-none p-3 w-100">
                         Crear empresa
                     </Button>
                 </Col>

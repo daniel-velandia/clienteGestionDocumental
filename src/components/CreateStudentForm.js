@@ -6,7 +6,6 @@ function CreateStudentForm({errors, callback}) {
     const [identification, setIdentification] = useState("");
     const [name, setName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [career, setCareer] = useState("");
@@ -14,7 +13,7 @@ function CreateStudentForm({errors, callback}) {
 
     const send = (e) => {
         e.preventDefault();
-        callback({identification, name, lastName, username, email, phone, career, semester});
+        callback({identification, name, lastName, email, phone, career, semester});
     }
 
     return (
@@ -70,22 +69,6 @@ function CreateStudentForm({errors, callback}) {
                 </Col>
                 <Col md="6" xs="12">
                     <FloatingLabel
-                        controlId="username"
-                        label="Username"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="Username"
-                            type="text"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                            isInvalid={errors.username} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.username}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
                         controlId="email"
                         label="Correo"
                         className="mb-4">
@@ -117,17 +100,22 @@ function CreateStudentForm({errors, callback}) {
                     </FloatingLabel>
                 </Col>
                 <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="career"
-                        label="Carrera"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="Carrera"
-                            type="text"
-                            value={career}
-                            onChange={e => setCareer(e.target.value)}
-                            isInvalid={errors.career} />
-                        <Form.Control.Feedback type="invalid">
+                    <FloatingLabel controlId="career" label="Carrera" className="mb-4">
+                        <Form.Select 
+                            value={career} 
+                            onChange={e => setCareer(e.target.value)} 
+                            isInvalid={errors.career}>
+                            <option value=''>Seleccione una carrera</option>
+                            <option value='Diseño gráfico'>Diseño gráfico</option>
+                            <option value='Administración de empresas'>Administración de empresas</option>
+                            <option value='Hoteleria y turismo'>Hoteleria y turismo</option>
+                            <option value='Ingenieria de software'>Ingenieria de software</option>
+                            <option value='Negocios internacionales'>Negocios internacionales</option>
+                            <option value='Administración financiera'>Administración financiera</option>
+                            <option value='Negocios internacionales distancia'>Negocios internacionales distancia</option>
+                            <option value='Gestión logístaca empresarial'>Gestión logístaca empresarial</option>
+                        </Form.Select>
+                        <Form.Control.Feedback type='invalid'>
                             {errors.career}
                         </Form.Control.Feedback>
                     </FloatingLabel>
@@ -142,14 +130,16 @@ function CreateStudentForm({errors, callback}) {
                             type="number"
                             value={semester}
                             onChange={e => setSemester(e.target.value)}
-                            isInvalid={errors.semester} />
+                            isInvalid={errors.semester} 
+                            min={1}
+                            max={10} />
                         <Form.Control.Feedback type="invalid">
                             {errors.semester}
                         </Form.Control.Feedback>
                     </FloatingLabel>
                 </Col>
-                <Col xs="12" className="d-flex justify-content-center">
-                    <Button type="submit" variant="primary" className="mt-3">
+                <Col sm="12">
+                    <Button type="submit" className="mt-3 my-color my-border-none p-3 w-100">
                         Crear estudiante
                     </Button>
                 </Col>

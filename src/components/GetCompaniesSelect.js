@@ -2,21 +2,15 @@ import { useEffect, useState } from "react";
 import { LIST_COMPANY_GET_ENDPOINT } from "../connections/helpers/endpoints";
 import { FloatingLabel, Form } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { GetAllCompanies } from "../FakeApi/company";
 
 function GetCompaiesSelect({errors, value, callback}) {
 
     const [companies, setCompanies] = useState([]);
-    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     axios.get(LIST_COMPANY_GET_ENDPOINT)
-    //     .then(response => {
-    //         setCompanies(response.data);
-    //     }).catch(err => {
-    //         navigate(-1);
-    //     })
-    // });
+    useEffect(() => {
+        setCompanies(GetAllCompanies());
+    }, []);
 
     return (
 
@@ -28,7 +22,7 @@ function GetCompaiesSelect({errors, value, callback}) {
                 <option value=''>Seleccione una empresa</option>
                 {
                     companies.map(company => 
-                    <option key={company.idCompany} value={company.idCompany}>
+                    <option key={company.companyId} value={company.companyId}>
                         {`${company.nit} ${company.companyName}`}
                     </option>)
                 }

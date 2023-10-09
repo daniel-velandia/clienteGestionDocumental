@@ -2,21 +2,15 @@ import { useEffect, useState } from "react";
 import { LIST_STUDENT_GET_ENDPOINT } from "../connections/helpers/endpoints";
 import { FloatingLabel, Form } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { GetAllStudents } from "../FakeApi/student";
 
 function GetStudentsSelect({errors, value, callback}) {
 
     const [students, setStudents] = useState([]);
-    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     axios.get(LIST_STUDENT_GET_ENDPOINT)
-    //     .then(response => {
-    //         setStudents(response.data);
-    //     }).catch(err => {
-    //         navigate(-1);
-    //     })
-    // });
+    useEffect(() => {
+        setStudents(GetAllStudents());
+    });
 
     return (
         <FloatingLabel controlId="students" label="Estudiantes" className="mb-4">
@@ -27,8 +21,8 @@ function GetStudentsSelect({errors, value, callback}) {
                 <option value=''>Seleccione un estudiante</option>
                 {
                     students.map(student => 
-                    <option key={student.idStudent} value={student.idStudent}>
-                        {`${student.identityCard} ${student.name} ${student.lastName}`}
+                    <option key={student.studentId} value={student.studentId}>
+                        {`${student.identification} ${student.name} ${student.lastName}`}
                     </option>)
                 }
             </Form.Select>

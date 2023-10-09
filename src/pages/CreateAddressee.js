@@ -3,14 +3,15 @@ import validator from "validator";
 import { useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import { CREATE_MANAGER_POST_ENDPOINT } from "../connections/helpers/endpoints";
-import { CreateManagerForm } from "../components/CreateManagerForm"
+import { CreateAddresseeForm } from "../components/CreateAddresseeForm"
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
+import { CreateAddresseApi } from "../FakeApi/addresse";
 
-function CreateManager() {
+function CreateAddressee() {
     
     const [errors, setErrors] = useState({});
 
-    const create = async ({identification, name, lastName, username, email, phone, charge, area}) => {
+    async function create({identification, name, lastName, email, phone, charge, area}) {
 
         const error = {};
 
@@ -24,10 +25,6 @@ function CreateManager() {
 
         if(validator.isEmpty(lastName)) {
             error.lastName = "El apellido no puede estar vacio"
-        }
-
-        if(validator.isEmpty(username)) {
-            error.username = "El username no puede estar vacio"
         }
 
         if(validator.isEmpty(email)) {
@@ -49,15 +46,7 @@ function CreateManager() {
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-
-            console.log({identification, name, lastName, username, email, phone, charge, area});
-
-            // axios.post(CREATE_MANAGER_POST_ENDPOINT, {identification, name, lastName, username, email, phone, charge, area})
-            // .then( response => {
-            //     
-            // }).catch( err => {
-            //     setErrors({new: err.response.data.message})
-            // });
+            CreateAddresseApi({identification, name, lastName, email, phone, charge, area});
         }
     };
     
@@ -66,11 +55,12 @@ function CreateManager() {
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
                     {errors.new && <Alert variant="danger">{errors.new}</Alert>}
-                    <CreateManagerForm errors={errors} callback={create} />
+                    <h2 className="my-3 text-center">Crear destinatario</h2>
+                    <CreateAddresseeForm errors={errors} callback={create} />
                 </Col>
             </Row>
         </Container>
     );
 }
 
-export { CreateManager }
+export { CreateAddressee }

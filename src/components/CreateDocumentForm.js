@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
 import { GetStudentsSelect } from "./GetStudentsSelect";
 import { GetCompaiesSelect } from "./GetCompaniesSelect";
-import { GetManagersSelect } from "./GetManagersSelect";
+import { GetAddresseersSelect } from "./GetAddresseersSelect";
 import { GetDocumentsSelect } from "./GetDocumentsSelect";
 import { GetFileButton } from "./GetFileButton";
 
@@ -18,14 +18,14 @@ function CreateDocumentForm({errors, callback}) {
     const [requiresResponse, setRequiresResponse] = useState(false);
     const [studentSender, setStudentSender] = useState("");
     const [companySender, setCompanySender] = useState("");
-    const [manager, setManager] = useState("");
+    const [addressee, setAddressee] = useState("");
     const [responseDocument, setResponseDocument] = useState("");
-    const [informManager, setInformManager] = useState(false);
+    const [informAddressee, setInformAddressee] = useState(false);
 
     const send = (e) => {
         e.preventDefault();
         callback({file, name, registrationNumber, typeRegistration, typeDocument, subject, annexes,
-            requiresResponse, studentSender, companySender, manager, responseDocument});
+            requiresResponse, studentSender, companySender, addressee, responseDocument});
     }
 
     return (
@@ -49,7 +49,7 @@ function CreateDocumentForm({errors, callback}) {
                 </Col>
                 <Col md="6" xs="12">
                     <FloatingLabel
-                        controlId="registrationNumber"
+                        controlId="typeDocument"
                         label="Tipo de documento"
                         className="mt-md-3 mb-4">
                         <Form.Control 
@@ -108,10 +108,10 @@ function CreateDocumentForm({errors, callback}) {
                         callback={setCompanySender} />
                 </Col>
                 <Col md="6" xs="12">
-                    <GetManagersSelect
+                    <GetAddresseersSelect
                         errors={errors}
-                        value={manager}
-                        callback={setManager} />
+                        value={addressee}
+                        callback={setAddressee} />
                 </Col>
                 {
                     !typeRegistration &&
@@ -150,13 +150,13 @@ function CreateDocumentForm({errors, callback}) {
                     <Form.Check 
                         className="mb-4" 
                         type="switch"
-                        id="informManager"
+                        id="informAddressee"
                         label="Informar al encargado"
-                        checked={informManager}
-                        onChange={e => setInformManager(!informManager)} />
+                        checked={informAddressee}
+                        onChange={e => setInformAddressee(!informAddressee)} />
                 </Col>
-                <Col xs="12" className="d-flex justify-content-center">
-                    <Button type="submit" variant="primary" className="mt-3">
+                <Col sm="12">
+                    <Button type="submit" className="mt-3 my-color my-border-none p-3 w-100">
                         Crear documento
                     </Button>
                 </Col>

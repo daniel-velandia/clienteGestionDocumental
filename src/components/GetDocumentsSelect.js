@@ -2,21 +2,15 @@ import { useEffect, useState } from "react";
 import { LIST_DOCUMENT_GET_ENDPOINT } from "../connections/helpers/endpoints";
 import { FloatingLabel, Form } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { GetAllDocuments } from "../FakeApi/document";
 
 function GetDocumentsSelect({errors, value, callback}) {
 
     const [documents, setDocuments] = useState([]);
-    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     axios.get(LIST_DOCUMENT_GET_ENDPOINT)
-    //     .then(response => {
-    //         setDocuments(response.data);
-    //     }).catch(err => {
-    //         navigate(-1);
-    //     })
-    // });
+    useEffect(() => {
+       setDocuments(GetAllDocuments());
+    }, []);
 
     return (
         <FloatingLabel controlId="responseDocument" label="Documentos" className="mb-4">
@@ -27,7 +21,7 @@ function GetDocumentsSelect({errors, value, callback}) {
                 <option value=''>Seleccione un documento a responder</option>
                 {
                     documents.map(document => 
-                    <option key={document.idDocument} value={document.idDocument}>
+                    <option key={document.documentId} value={document.documentId}>
                         {`${document.registrationNumber} ${document.name} ${document.size}`}
                     </option>)
                 }

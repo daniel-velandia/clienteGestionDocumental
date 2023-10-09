@@ -5,13 +5,15 @@ import { Alert, Col, Container, Row } from "react-bootstrap";
 import { CREATE_DOCUMENT_POST_ENDPOINT } from "../connections/helpers/endpoints";
 import { CreateDocumentForm } from "../components/CreateDocumentForm";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
+import { saveAs } from 'file-saver';
+import { CreateDocumentApi } from "../FakeApi/document";
 
 function CreateDocument() {
 
     const [errors, setErrors] = useState({});
 
-    const create = async ({file, name, registrationNumber, typeRegistration, typeDocument, 
-        subject, annexes, requiresResponse, studentSender, companySender, manager, responseDocument}) => {
+    async function create({file, name, registrationNumber, typeRegistration, typeDocument, 
+        subject, annexes, requiresResponse, studentSender, companySender, addressee, responseDocument}) {
 
         const error = {};
 
@@ -35,14 +37,14 @@ function CreateDocument() {
             error.annexes = "El anexo no puede estar vacio"
         }
 
-        // if(validator.isEmpty(manager)) {
-        //     error.manager = "El encargado no puede estar vacio"
-        // }
+        if(validator.isEmpty(addressee)) {
+            error.addressee = "El encargado no puede estar vacio"
+        }
 
-        // if((validator.isEmpty(studentSender) && validator.isEmpty(companySender)) ||
-        //         (!validator.isEmpty(studentSender) && !validator.isEmpty(companySender))) {
-        //     error.sender = 'Debe seleccionar un remitente (estudiante o empresa)';
-        // }
+        if((validator.isEmpty(studentSender) && validator.isEmpty(companySender)) ||
+                (!validator.isEmpty(studentSender) && !validator.isEmpty(companySender))) {
+            error.sender = 'Debe seleccionar un remitente (estudiante o empresa)';
+        }
 
         if(!typeRegistration && validator.isEmpty(responseDocument)) {
             error.responseDocument = 'Debe de seleccionar un archivo a responder';
@@ -51,17 +53,13 @@ function CreateDocument() {
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
+            CreateDocumentApi({file, name, registrationNumber, typeRegistration, typeDocument, subject, annexes,
+                requiresResponse, studentSender, companySender, addressee, responseDocument});
 
-            console.log({file, name, registrationNumber, typeRegistration, typeDocument, subject, annexes,
-                requiresResponse, studentSender, companySender, manager, responseDocument});
+                // const blob = new Blob([new Uint8Array(file)], { type: 'application/pdf' });
     
-            // axios.post(CREATE_DOCUMENT_POST_ENDPOINT, {file, registrationNumber, typeRegistration, typeDocument, subject, annexes,
-            // requiresResponse, studentSender, companySender, manager, responseDocument})
-            // .then( response => {
-            //     
-            // }).catch( err => {
-            //     setErrors({new: err.response.data.message})
-            // });
+                // Utiliza FileSaver.js para guardar el Blob como un archivo PDF
+                // saveAs(blob, name);
         }
     };
 
@@ -70,6 +68,7 @@ function CreateDocument() {
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
                     {errors.new && <Alert variant="danger">{errors.new}</Alert>}
+                    <h2 className="my-3 text-center">Crear documento</h2>
                     <CreateDocumentForm errors={errors} callback={create} />
                 </Col>
             </Row>
