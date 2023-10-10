@@ -6,9 +6,8 @@ function GetFileButton({errors, fileCallback, nameCallback}) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.onloadend = function() {
-            const arrayBuffer = reader.result;
-            const bytes = new Uint8Array(arrayBuffer);
-            resolve(bytes);
+            const pdfBlob = new Blob([reader.result], { type: 'application/pdf' });
+            resolve(pdfBlob);
           };
           reader.onerror = function() {
             reject(reader.error);
@@ -22,8 +21,8 @@ function GetFileButton({errors, fileCallback, nameCallback}) {
         const file = e.target.files[0];
 
         convertToByteArray(file)
-        .then(bytes => {
-            fileCallback(Array.from(bytes));
+        .then(pdfBlob => {
+            fileCallback(pdfBlob);
             nameCallback(file.name)
         })
 

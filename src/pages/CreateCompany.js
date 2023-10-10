@@ -1,44 +1,42 @@
-import axios from "axios";
 import validator from "validator";
 import { useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
-import { CREATE_COMPANY_POST_ENDPOINT } from "../connections/helpers/endpoints";
 import { CreateCompanyForm } from "../components/CreateCompanyForm";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
-import { CreateCompanyApi } from "../FakeApi/company";
+import { createCompany } from "../FakeApi/company";
 
 function CreateCompany() {
 
     const [errors, setErrors] = useState({});
 
-    async function create({companyName, nit, email, phone, assistantName}) {
+    async function create({company}) {
 
         const error = {};
 
-        if(validator.isEmpty(companyName)) {
+        if(validator.isEmpty(company.companyName)) {
             error.companyName = "El nombre de la empresa no puede estar vacio"
         }
 
-        if(validator.isEmpty(nit)) {
+        if(validator.isEmpty(company.nit)) {
             error.nit = "El nit no puede estar vacio"
         }
 
-        if(validator.isEmpty(email)) {
+        if(validator.isEmpty(company.email)) {
             error.email = "El correo no puede estar vacio"
         }
 
-        if(validator.isEmpty(phone)) {
+        if(validator.isEmpty(company.phone)) {
             error.phone = "El telefono no puede estar vacio"
         }
 
-        if(validator.isEmpty(assistantName)) {
+        if(validator.isEmpty(company.assistantName)) {
             error.assistantName = "El nombre del asistente no puede estar vacio"
         }
 
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            CreateCompanyApi({companyName, nit, email, phone, assistantName});
+            createCompany(company);
         }
     };
 

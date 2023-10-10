@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
+import { Company } from "../models/Company";
 
 function CreateCompanyForm({errors, callback}) {
 
@@ -11,7 +12,8 @@ function CreateCompanyForm({errors, callback}) {
 
     const send = (e) => {
         e.preventDefault();
-        callback({companyName, nit, email, phone, assistantName});
+        const company = new Company(companyName, nit, email, phone, assistantName);
+        callback({company});
     }
 
     return (

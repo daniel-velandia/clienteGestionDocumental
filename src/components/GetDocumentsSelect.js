@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { LIST_DOCUMENT_GET_ENDPOINT } from "../connections/helpers/endpoints";
 import { FloatingLabel, Form } from "react-bootstrap";
-import axios from "axios";
-import { GetAllDocuments } from "../FakeApi/document";
+import { readDocuments } from "../FakeApi/document";
 
 function GetDocumentsSelect({errors, value, callback}) {
 
     const [documents, setDocuments] = useState([]);
 
     useEffect(() => {
-       setDocuments(GetAllDocuments());
+       setDocuments(readDocuments());
     }, []);
 
     return (

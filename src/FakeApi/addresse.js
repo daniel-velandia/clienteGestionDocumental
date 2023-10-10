@@ -1,37 +1,38 @@
-const addresses = [];
+import { AddresseDb } from "../models/Addresse";
 
-function CreateAddresseApi({ identification, name, lastName, email, phone, charge, area }) {
-  const addresseeId = Math.floor(Math.random() * 1000000);
-  addresses.push({ addresseeId, identification, name, lastName, email, phone, charge, area });
+let addresses = [];
+
+function createAddresse(addresse) {
+  const addresseId = Math.floor(Math.random() * 1000000) + 1;
+  const addresseDb = new AddresseDb(
+    addresseId, 
+    addresse.identification,
+    addresse.name,
+    addresse.lastName,
+    addresse.email,
+    addresse.phone,
+    addresse.charge,
+    addresse.area);
+  addresses.push(addresseDb);
 }
 
-function GetAddresse({ id }) {
-  return addresses.find((address) => address.addresseeId === id);
-}
-
-function UpdateAddresse({ id, identification, name, lastName, email, phone, charge, area }) {
-  const address = addresses.find((address) => address.addresseeId === id);
-  if (address) {
-    address.identification = identification;
-    address.name = name;
-    address.lastName = lastName;
-    address.email = email;
-    address.phone = phone;
-    address.charge = charge;
-    address.area = area;
-    addresses[id] = address;
-  }
-}
-
-function DeleteAddresse({ id }) {
-  const index = addresses.findIndex((address) => address.addresseeId === id);
-  if (index !== -1) {
-    addresses.splice(index, 1);
-  }
-}
-
-function GetAllAddresses() {
+function readAddresses() {
   return addresses;
 }
 
-export { CreateAddresseApi, GetAddresse, UpdateAddresse, DeleteAddresse, GetAllAddresses }
+function findAddresseById(addresseId) {
+  return addresses.find(addresse => addresse.addresseId === addresseId);
+}
+
+function updateAddresseById(addresseId, addresse) {
+  const addresseDb = findAddresseById(addresseId);
+  if (addresseDb) {
+    Object.assign(addresseDb, addresse);
+  }
+}
+
+function deleteAddresseById(addresseId) {
+  addresses = addresses.filter(addresse => addresse.addresseId !== addresseId);
+}
+
+export { createAddresse, readAddresses, findAddresseById, updateAddresseById, deleteAddresseById };

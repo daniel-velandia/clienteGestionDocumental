@@ -7,16 +7,21 @@ function DocumentCard({document}) {
 
     return (
         <Col sm="12" md="6" lg="3" className="mb-4">
-            <Card className="my-border-none shadow">
+            <Card className="my-border-none my-shadow">
                 <Card.Body>
-                    <Card.Title as={NavLink} to={`/document/${document.documentId}`} className="text-decoration-none">
-                        {document.name}
-                    </Card.Title>
-                    <Card.Subtitle className="my-2 text-muted">{`${document.size} - ${document.dateCreated}`}</Card.Subtitle>
+                    <div className="w-100 overflow-hidden text-truncate">
+                        <Card.Title as={NavLink} to={`/document/${document.documentId}`} 
+                            className="text-decoration-none">
+                            {document.name}
+                        </Card.Title>
+                    </div>
+                    <Card.Subtitle className="my-2 text-muted">
+                        {`${document.size} - ${document.dateCreated}`}
+                    </Card.Subtitle>
                     <Row>
                         <Col>
-                            <DownloadFileButton />
-                            <VisualizeFileButton />
+                            <DownloadFileButton documentId={document.documentId}/>
+                            <VisualizeFileButton documentId={document.documentId}/>
                         </Col>
                         <Col>
                             <Card.Text className="d-flex justify-content-end mt-2">

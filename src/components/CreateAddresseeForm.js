@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
+import { Addresse } from "../models/Addresse";
 
 function CreateAddresseeForm({errors, callback}) {
 
@@ -13,7 +14,8 @@ function CreateAddresseeForm({errors, callback}) {
 
     const send = (e) => {
         e.preventDefault();
-        callback({identification, name, lastName, email, phone, charge, area});
+        const addresse = new Addresse(identification, name, lastName, email, phone, charge, area);
+        callback({addresse});
     }
 
     return (

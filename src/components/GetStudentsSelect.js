@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { LIST_STUDENT_GET_ENDPOINT } from "../connections/helpers/endpoints";
 import { FloatingLabel, Form } from "react-bootstrap";
-import axios from "axios";
-import { GetAllStudents } from "../FakeApi/student";
+import { readStudents } from "../FakeApi/student";
 
 function GetStudentsSelect({errors, value, callback}) {
 
     const [students, setStudents] = useState([]);
 
     useEffect(() => {
-        setStudents(GetAllStudents());
-    });
+        setStudents(readStudents());
+    }, []);
 
     return (
         <FloatingLabel controlId="students" label="Estudiantes" className="mb-4">

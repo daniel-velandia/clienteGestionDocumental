@@ -1,10 +1,13 @@
 import { Button } from "react-bootstrap";
 import download from "../assets/images/download.png";
+import { findDocumentById } from "../FakeApi/document";
+import { saveAs } from "file-saver";
 
-function DownloadFileButton() {
+function DownloadFileButton({documentId}) {
 
     const DownloadFile = () => {
-
+        const document = findDocumentById(documentId);
+        saveAs(document.file, document.name);
     };
 
     return (

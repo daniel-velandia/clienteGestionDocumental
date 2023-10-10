@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { LIST_COMPANY_GET_ENDPOINT } from "../connections/helpers/endpoints";
 import { FloatingLabel, Form } from "react-bootstrap";
-import axios from "axios";
-import { GetAllCompanies } from "../FakeApi/company";
+import { readCompanies } from "../FakeApi/company";
 
 function GetCompaiesSelect({errors, value, callback}) {
 
     const [companies, setCompanies] = useState([]);
 
     useEffect(() => {
-        setCompanies(GetAllCompanies());
+        setCompanies(readCompanies());
     }, []);
 
     return (

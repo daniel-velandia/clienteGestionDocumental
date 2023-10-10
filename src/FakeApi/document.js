@@ -1,99 +1,55 @@
-const documents = [];
+import { DocumentDb } from "../models/Document";
 
-function CreateDocumentApi({
-  file,
-  name,
-  registrationNumber,
-  typeRegistration,
-  typeDocument,
-  subject,
-  annexes,
-  requiresResponse,
-  studentSender,
-  companySender,
-  addressee,
-  responseDocument
-}) {
-  const documentId = Math.floor(Math.random() * 1000000);
-  const dateCreated = new Date(); 
-  const size = file.length; 
+let documents = [];
 
-  documents.push({
-    documentId,
-    file,
-    name,
-    registrationNumber,
-    typeRegistration,
-    typeDocument,
+function createDocument(document) {
+  const documentId = Math.floor(Math.random() * 1000000) + 1;
+  const dateCreated = getCurrentDate();
+  const size = document.file.size;
+  const documentDb = new DocumentDb(
+    documentId, 
+    document.file,
+    document.name,
+    document.registrationNumber,
+    document.typeRegistration,
+    document.typeDocument,
     dateCreated,
-    subject,
-    annexes,
-    requiresResponse,
-    studentSender,
-    companySender,
-    addressee,
-    responseDocument,
-    size
-  });
+    size,
+    document.subject,
+    document.annexes,
+    document.requiresResponse,
+    document.studentSender,
+    document.companySender,
+    document.addressee,
+    document.responseDocument);
+  documents.push(documentDb);
 }
 
-
-function GetDocument({documentId}) {
-  return documents.find((document) => document.documentId === documentId);
+function getCurrentDate() {
+  const now = new Date();
+  const day = now.getDate();
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
+  return `${day}/${month}/${year}`;
 }
 
-function UpdateDocument({
-  documentId,
-    file,
-    name,
-    registrationNumber,
-    typeRegistration,
-    typeDocument,
-    dateCreated,
-    subject,
-    annexes,
-    requiresResponse,
-    studentSender,
-    companySender,
-    addressee,
-    responseDocument,
-    size
-}) {
-  const index = documents.findIndex((document) => document.documentId === documentId);
-
-  if (index !== -1) {
-    documents[index] = {
-      ...documents[index],
-      file,
-      name,
-      registrationNumber,
-      typeRegistration,
-      typeDocument,
-      dateCreated,
-      subject,
-      annexes,
-      requiresResponse,
-      studentSender,
-      companySender,
-      addressee,
-      responseDocument,
-      size
-    };
-  }
-}
-
-function DeleteDocument({documentId}) {
-  const index = documents.findIndex((document) => document.documentId === documentId);
-
-  if (index !== -1) {
-    documents.splice(index, 1);
-  }
-}
-
-function GetAllDocuments() {
+function readDocuments() {
   return documents;
 }
 
+function findDocumentById(documentId) {
+  return documents.find(document => document.documentId === documentId);
+}
 
+function updateDocumentById(documentId, document) {
+  const documentDb = findDocumentById(documentId);
+  if (documentDb) {
+    Object.assign(documentDb, document);
+  }
+}
 
-export { CreateDocumentApi, GetDocument, UpdateDocument, DeleteDocument, GetAllDocuments }
+function deleteDocumentById(documentId) {
+  documents = documents.filter(document => document.documentId !== documentId);
+}
+
+export { createDocument, readDocuments, findDocumentById, updateDocumentById, deleteDocumentById };

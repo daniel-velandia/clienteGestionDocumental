@@ -1,37 +1,36 @@
-import { GetAllDocuments } from "./document";
+import { CompanyDb } from "../models/Company";
 
-const companies = [];
+let companies = [];
 
-function CreateCompanyApi({ companyName, nit, email, phone, assistantName }) {
-  const companyId = Math.floor(Math.random() * 1000000);
-  companies.push({ companyId, companyName, nit, email, phone, assistantName });
+function createCompany(company) {
+  const companyId = Math.floor(Math.random() * 1000000) + 1;
+  const companyDb = new CompanyDb(
+    companyId, 
+    company.companyName,
+    company.nit,
+    company.email,
+    company.phone,
+    company.senderName);
+  companies.push(companyDb);
 }
 
-function GetCompany({ id }) {
-  return companies.find((company) => company.companyId === id);
-}
-
-function UpdateCompany({ id, companyName, nit, email, phone, assistantName }) {
-  const company = companies.find((company) => company.companyId === id);
-  if (company) {
-    company.companyName = companyName;
-    company.nit = nit;
-    company.email = email;
-    company.phone = phone;
-    company.assistantName = assistantName;
-    companies[id] = company;
-  }
-}
-
-function DeleteCompany({ id }) {
-  const index = companies.findIndex((company) => company.companyId === id);
-  if (index !== -1) {
-    companies.splice(index, 1);
-  }
-}
-
-function GetAllCompanies() {
+function readCompanies() {
   return companies;
 }
 
-export { CreateCompanyApi, GetCompany, UpdateCompany, DeleteCompany, GetAllCompanies }
+function findCompanyById(companyId) {
+  return companies.find(company => company.companyId === companyId);
+}
+
+function updateCompanyById(companyId, company) {
+  const companyDb = findCompanyById(companyId);
+  if (companyDb) {
+    Object.assign(companyDb, company);
+  }
+}
+
+function deleteCompanyById(companyId) {
+  companies = companies.filter(company => company.companyId !== companyId);
+}
+
+export { createCompany, readCompanies, findCompanyById, updateCompanyById, deleteCompanyById };

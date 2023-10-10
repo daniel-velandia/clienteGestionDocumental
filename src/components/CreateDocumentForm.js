@@ -5,6 +5,7 @@ import { GetCompaiesSelect } from "./GetCompaniesSelect";
 import { GetAddresseersSelect } from "./GetAddresseersSelect";
 import { GetDocumentsSelect } from "./GetDocumentsSelect";
 import { GetFileButton } from "./GetFileButton";
+import { Document } from "../models/Document";
 
 function CreateDocumentForm({errors, callback}) {
 
@@ -24,8 +25,20 @@ function CreateDocumentForm({errors, callback}) {
 
     const send = (e) => {
         e.preventDefault();
-        callback({file, name, registrationNumber, typeRegistration, typeDocument, subject, annexes,
-            requiresResponse, studentSender, companySender, addressee, responseDocument});
+        const document = new Document(
+            file, 
+            name, 
+            registrationNumber, 
+            typeRegistration, 
+            typeDocument, 
+            subject, 
+            annexes,
+            requiresResponse, 
+            studentSender, 
+            companySender, 
+            addressee, 
+            responseDocument);
+        callback({document});
     }
 
     return (

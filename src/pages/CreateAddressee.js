@@ -1,52 +1,50 @@
-import axios from "axios";
 import validator from "validator";
 import { useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
-import { CREATE_MANAGER_POST_ENDPOINT } from "../connections/helpers/endpoints";
 import { CreateAddresseeForm } from "../components/CreateAddresseeForm"
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
-import { CreateAddresseApi } from "../FakeApi/addresse";
+import { createAddresse } from "../FakeApi/addresse";
 
 function CreateAddressee() {
     
     const [errors, setErrors] = useState({});
 
-    async function create({identification, name, lastName, email, phone, charge, area}) {
+    async function create({addresse}) {
 
         const error = {};
 
-        if(validator.isEmpty(identification)) {
+        if(validator.isEmpty(addresse.identification)) {
             error.identification = "El documento de identidad no puede estar vacio"
         }
 
-        if(validator.isEmpty(name)) {
+        if(validator.isEmpty(addresse.name)) {
             error.name = "El nombre no puede estar vacio"
         }
 
-        if(validator.isEmpty(lastName)) {
+        if(validator.isEmpty(addresse.lastName)) {
             error.lastName = "El apellido no puede estar vacio"
         }
 
-        if(validator.isEmpty(email)) {
+        if(validator.isEmpty(addresse.email)) {
             error.email = "El correo no puede estar vacio"
         }
 
-        if(validator.isEmpty(phone)) {
+        if(validator.isEmpty(addresse.phone)) {
             error.phone = "El telefono no puede estar vacio"
         }
 
-        if(validator.isEmpty(charge)) {
+        if(validator.isEmpty(addresse.charge)) {
             error.charge = "El cargo no puede estar vacio"
         }
 
-        if(validator.isEmpty(area)) {
+        if(validator.isEmpty(addresse.area)) {
             error.area = "El area no puede estar vacio"
         }
 
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            CreateAddresseApi({identification, name, lastName, email, phone, charge, area});
+            createAddresse(addresse);
         }
     };
     

@@ -1,52 +1,50 @@
-import axios from "axios";
 import validator from "validator";
 import { useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
-import { CREATE_STUDENT_POST_ENDPOINT } from "../connections/helpers/endpoints";
 import { CreateStudentForm } from "../components/CreateStudentForm";
-import { CreateStudentApi } from "../FakeApi/student";
+import { createStudent } from "../FakeApi/student";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
 
 function CreateStudent() {
 
     const [errors, setErrors] = useState({});
 
-    async function create({identification, name, lastName, email, phone, career, semester}) {
+    async function create({student}) {
 
         const error = {};
 
-        if(validator.isEmpty(identification)) {
+        if(validator.isEmpty(student.identification)) {
             error.identification = "El documento de identidad no puede estar vacio"
         }
 
-        if(validator.isEmpty(name)) {
+        if(validator.isEmpty(student.name)) {
             error.name = "El nombre no puede estar vacio"
         }
 
-        if(validator.isEmpty(lastName)) {
+        if(validator.isEmpty(student.lastName)) {
             error.lastName = "El apellido no puede estar vacio"
         }
 
-        if(validator.isEmpty(email)) {
+        if(validator.isEmpty(student.email)) {
             error.email = "El correo no puede estar vacio"
         }
 
-        if(validator.isEmpty(phone)) {
+        if(validator.isEmpty(student.phone)) {
             error.phone = "El telefono no puede estar vacio"
         }
 
-        if(validator.isEmpty(career)) {
+        if(validator.isEmpty(student.career)) {
             error.career = "La carrera no puede estar vacia"
         }
 
-        if(validator.isEmpty(semester)) {
+        if(validator.isEmpty(student.semester)) {
             error.semester = "El semestre no puede estar vacio"
         }
 
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            CreateStudentApi({identification, name, lastName, email, phone, career, semester});
+            createStudent(student);
         }
     };
 

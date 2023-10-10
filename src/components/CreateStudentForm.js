@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
+import { Student } from "../models/Student";
 
 function CreateStudentForm({errors, callback}) {
 
@@ -13,7 +14,8 @@ function CreateStudentForm({errors, callback}) {
 
     const send = (e) => {
         e.preventDefault();
-        callback({identification, name, lastName, email, phone, career, semester});
+        const student = new Student(identification, name, lastName, email, phone, career, semester);
+        callback({student});
     }
 
     return (

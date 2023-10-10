@@ -1,65 +1,55 @@
-import axios from "axios";
 import validator from "validator";
 import { useState } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
-import { CREATE_DOCUMENT_POST_ENDPOINT } from "../connections/helpers/endpoints";
 import { CreateDocumentForm } from "../components/CreateDocumentForm";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
-import { saveAs } from 'file-saver';
-import { CreateDocumentApi } from "../FakeApi/document";
+import { createDocument } from "../FakeApi/document";
 
 function CreateDocument() {
 
     const [errors, setErrors] = useState({});
 
-    async function create({file, name, registrationNumber, typeRegistration, typeDocument, 
-        subject, annexes, requiresResponse, studentSender, companySender, addressee, responseDocument}) {
+    async function create({document}) {
 
         const error = {};
 
-        if(file.length < 1) {
+        if(document.file.length < 1) {
             error.file = "Error al cargar el archivo"
         }
 
-        if(validator.isEmpty(registrationNumber)) {
+        if(validator.isEmpty(document.registrationNumber)) {
             error.registrationNumber = "El numero de radicado no puede estar vacio"
         }
 
-        if(validator.isEmpty(typeDocument)) {
+        if(validator.isEmpty(document.typeDocument)) {
             error.typeDocument = "El tipo de documento no puede estar vacio"
         }
 
-        if(validator.isEmpty(subject)) {
+        if(validator.isEmpty(document.subject)) {
             error.subject = "El asunto no puede estar vacio"
         }
 
-        if(validator.isEmpty(annexes)) {
+        if(validator.isEmpty(document.annexes)) {
             error.annexes = "El anexo no puede estar vacio"
         }
 
-        if(validator.isEmpty(addressee)) {
+        if(validator.isEmpty(document.addressee)) {
             error.addressee = "El encargado no puede estar vacio"
         }
 
-        if((validator.isEmpty(studentSender) && validator.isEmpty(companySender)) ||
-                (!validator.isEmpty(studentSender) && !validator.isEmpty(companySender))) {
+        if((validator.isEmpty(document.studentSender) && validator.isEmpty(document.companySender)) ||
+                (!validator.isEmpty(document.studentSender) && !validator.isEmpty(document.companySender))) {
             error.sender = 'Debe seleccionar un remitente (estudiante o empresa)';
         }
 
-        if(!typeRegistration && validator.isEmpty(responseDocument)) {
+        if(!document.typeRegistration && validator.isEmpty(document.responseDocument)) {
             error.responseDocument = 'Debe de seleccionar un archivo a responder';
         }
 
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            CreateDocumentApi({file, name, registrationNumber, typeRegistration, typeDocument, subject, annexes,
-                requiresResponse, studentSender, companySender, addressee, responseDocument});
-
-                // const blob = new Blob([new Uint8Array(file)], { type: 'application/pdf' });
-    
-                // Utiliza FileSaver.js para guardar el Blob como un archivo PDF
-                // saveAs(blob, name);
+            createDocument(document);
         }
     };
 

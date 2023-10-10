@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { LIST_MANAGER_GET_ENDPOINT } from "../connections/helpers/endpoints";
 import { FloatingLabel, Form } from "react-bootstrap";
-import axios from "axios";
-import { GetAllAddresses } from "../FakeApi/addresse";
+import { readAddresses } from "../FakeApi/addresse";
 
 function GetAddresseersSelect({errors, value, callback}) {
 
     const [addressees, setAddressees] = useState([]);
 
     useEffect(() => {
-        setAddressees(GetAllAddresses());
+        setAddressees(readAddresses());
     }, []);
 
     return (
