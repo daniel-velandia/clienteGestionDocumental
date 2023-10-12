@@ -33,8 +33,8 @@ function CreateDocument() {
             error.annexes = "El anexo no puede estar vacio"
         }
 
-        if(validator.isEmpty(document.addressee)) {
-            error.addressee = "El encargado no puede estar vacio"
+        if(validator.isEmpty(document.addresseer)) {
+            error.addresseer = "El destinatario no puede estar vacio"
         }
 
         if((validator.isEmpty(document.studentSender) && validator.isEmpty(document.companySender)) ||
@@ -54,7 +54,7 @@ function CreateDocument() {
     };
 
     return (
-        <Container className="mt-3 mb-3">
+        <Container className="my-mt-container mb-3">
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
                     {errors.new && <Alert variant="danger">{errors.new}</Alert>}

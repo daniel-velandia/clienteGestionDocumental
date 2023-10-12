@@ -10,7 +10,7 @@ class Document {
       requiresResponse,
       studentSender,
       companySender,
-      addressee,
+      addresseer,
       responseDocument
     ) {
       this.file = file;
@@ -23,7 +23,7 @@ class Document {
       this.requiresResponse = requiresResponse;
       this.studentSender = studentSender;
       this.companySender = companySender;
-      this.addressee = addressee;
+      this.addresseer = addresseer;
       this.responseDocument = responseDocument;
     }
 }
@@ -43,7 +43,7 @@ class DocumentDb {
       requiresResponse,
       studentSender,
       companySender,
-      addressee,
+      addresseer,
       responseDocument
     ) {
       this.documentId = documentId;
@@ -59,7 +59,7 @@ class DocumentDb {
       this.requiresResponse = requiresResponse;
       this.studentSender = studentSender;
       this.companySender = companySender;
-      this.addressee = addressee;
+      this.addresseer = addresseer;
       this.responseDocument = responseDocument;
     }
 }

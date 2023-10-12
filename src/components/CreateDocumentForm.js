@@ -19,7 +19,7 @@ function CreateDocumentForm({errors, callback}) {
     const [requiresResponse, setRequiresResponse] = useState(false);
     const [studentSender, setStudentSender] = useState("");
     const [companySender, setCompanySender] = useState("");
-    const [addressee, setAddressee] = useState("");
+    const [addresseer, setAddresseer] = useState("");
     const [responseDocument, setResponseDocument] = useState("");
     const [informAddressee, setInformAddressee] = useState(false);
 
@@ -36,7 +36,7 @@ function CreateDocumentForm({errors, callback}) {
             requiresResponse, 
             studentSender, 
             companySender, 
-            addressee, 
+            addresseer, 
             responseDocument);
         callback({document});
     }
@@ -123,8 +123,8 @@ function CreateDocumentForm({errors, callback}) {
                 <Col md="6" xs="12">
                     <GetAddresseersSelect
                         errors={errors}
-                        value={addressee}
-                        callback={setAddressee} />
+                        value={addresseer}
+                        callback={setAddresseer} />
                 </Col>
                 {
                     !typeRegistration &&

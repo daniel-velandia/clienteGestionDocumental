@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
-import { Addresse } from "../models/Addresse";
+import { Addresseer } from "../models/Addresseer";
 
-function CreateAddresseeForm({errors, callback}) {
+function CreateAddresseerForm({errors, callback}) {
 
     const [identification, setIdentification] = useState("");
     const [name, setName] = useState("");
@@ -14,8 +14,8 @@ function CreateAddresseeForm({errors, callback}) {
 
     const send = (e) => {
         e.preventDefault();
-        const addresse = new Addresse(identification, name, lastName, email, phone, charge, area);
-        callback({addresse});
+        const addresseer = new Addresseer(identification, name, lastName, email, phone, charge, area);
+        callback({addresseer});
     }
 
     return (
@@ -143,4 +143,4 @@ function CreateAddresseeForm({errors, callback}) {
     );
 }
 
-export { CreateAddresseeForm };
+export { CreateAddresseerForm };

@@ -48,21 +48,18 @@ function SearchDocuments() {
     }, [location])
 
     return (
-        <Container className="mt-3 mb-3">
-            <Row className="my-4">
-                <Col sm="8">
-                    <h2>Documentos encontrados</h2>
+        <Container className="my-mt-container mb-3">
+            <Row>
+                <Col xs="10">
+                    <h2 className="my-3">Documentos encontrados</h2>
                 </Col>
-                <Col sm="4">
+                <Col xs="2" className="align-self-center">
                     {errors.new && <Alert variant="danger">{errors.new}</Alert>}
                     <FilterDocumentsForm callback={search} />
                 </Col>
             </Row>
             <Row>
-                {
-                    (documents.length > 0) && 
-                        documents.map(document => <DocumentCard key={document.documentId} document={document} />)
-                }
+                {documents.map(document => <DocumentCard key={document.documentId} document={document} />)}
             </Row>
         </Container>
     );

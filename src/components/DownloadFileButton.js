@@ -13,7 +13,7 @@ function DownloadFileButton({documentId}) {
     return (
         
         <Button onClick={DownloadFile} variant="link" className="p-1">
-            <img src={download} alt="download"></img>
+            <img src={download} alt="download" />
         </Button>
     );
 }

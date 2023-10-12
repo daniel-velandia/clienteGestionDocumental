@@ -1,4 +1,4 @@
-class Addresse {
+class Addresseer {
     constructor(identification, name, lastName, email, phone, charge, area) {
       this.identification = identification;
       this.name = name;
@@ -10,9 +10,9 @@ class Addresse {
     }
 }
   
-class AddresseDb {
-    constructor(addresseId, identification, name, lastName, email, phone, charge, area) {
-      this.addresseId = addresseId;
+class AddresseerDb {
+    constructor(addresseerId, identification, name, lastName, email, phone, charge, area) {
+      this.addresseerId = addresseerId;
       this.identification = identification;
       this.name = name;
       this.lastName = lastName;
@@ -23,4 +23,4 @@ class AddresseDb {
     }
 }
 
-export { Addresse, AddresseDb };
+export { Addresseer, AddresseerDb };

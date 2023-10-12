@@ -21,10 +21,10 @@ function Navigation() {
     }
 
     return (
-        <Navbar expand="lg" className="bg-body-light">
+        <Navbar expand="lg" fixed="top" bg="light" data-bs-theme="light">
             <Container>
                 <Navbar.Brand as={NavLink} to={"/"}>
-                    <img src={logo} className='logo' alt="logo"></img>
+                    <img src={logo} className='my-logo' alt="logo"></img>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -49,7 +49,7 @@ function Navigation() {
                     </Row>
                     <Nav className="me-auto">
                         <Nav.Link as={NavLink} to={"/createstudent"}>Estudiante</Nav.Link>
-                        <Nav.Link as={NavLink} to={"/createaddressee"}>Destinatario</Nav.Link>
+                        <Nav.Link as={NavLink} to={"/createaddresseer"}>Destinatario</Nav.Link>
                         <Nav.Link as={NavLink} to={"/createcompany"}>Empresa</Nav.Link>
                         <Nav.Link as={NavLink} to={"/createdocument"}>Documento</Nav.Link>
                     </Nav>

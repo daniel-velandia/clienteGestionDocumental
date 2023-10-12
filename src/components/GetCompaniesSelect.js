@@ -20,8 +20,8 @@ function GetCompaiesSelect({errors, value, callback}) {
                 <option value=''>Seleccione una empresa</option>
                 {
                     companies.map(company => 
-                    <option key={company.companyId} value={company.companyId}>
-                        {`${company.nit} ${company.companyName}`}
+                    <option key={company.nit} value={company.companyId}>
+                        {company.nit} {company.companyName}
                     </option>)
                 }
             </Form.Select>

@@ -19,8 +19,8 @@ function GetStudentsSelect({errors, value, callback}) {
                 <option value=''>Seleccione un estudiante</option>
                 {
                     students.map(student => 
-                    <option key={student.studentId} value={student.studentId}>
-                        {`${student.identification} ${student.name} ${student.lastName}`}
+                    <option key={student.identification} value={student.studentId}>
+                        {student.identification} {student.name} {student.lastName}
                     </option>)
                 }
             </Form.Select>

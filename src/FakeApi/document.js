@@ -20,7 +20,7 @@ function createDocument(document) {
     document.requiresResponse,
     document.studentSender,
     document.companySender,
-    document.addressee,
+    document.addresseer,
     document.responseDocument);
   documents.push(documentDb);
 }

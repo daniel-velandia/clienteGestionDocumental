@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 import { FloatingLabel, Form } from "react-bootstrap";
-import { readAddresses } from "../FakeApi/addresse";
+import { readAddresseers } from "../FakeApi/addresseer";
 
 function GetAddresseersSelect({errors, value, callback}) {
 
-    const [addressees, setAddressees] = useState([]);
+    const [addresseers, setAddresseers] = useState([]);
 
     useEffect(() => {
-        setAddressees(readAddresses());
+        setAddresseers(readAddresseers());
     }, []);
 
     return (
-        <FloatingLabel controlId="addressees" label="Encargado" className="mb-4">
+        <FloatingLabel controlId="addresseers" label="Destinatario" className="mb-4">
             <Form.Select 
                 value={value} 
                 onChange={e => callback(e.target.value)} 
-                isInvalid={errors.addressee}>
+                isInvalid={errors.addresseer}>
                 <option value=''>Seleccione un destinatario</option>
                 {
-                    addressees.map(addressee => 
-                    <option key={addressee.addresseeId} value={addressee.addresseeId}>
-                        {`${addressee.identification} ${addressee.name} ${addressee.lastName}`}
+                    addresseers.map(addresseer => 
+                    <option key={addresseer.identification} value={addresseer.addresseerId}>
+                        {addresseer.identification} {addresseer.name} {addresseer.lastName}
                     </option>)
                 }
             </Form.Select>
             <Form.Control.Feedback type='invalid'>
-                {errors.addressee}
+                {errors.addresseer}
             </Form.Control.Feedback>
         </FloatingLabel>
     );

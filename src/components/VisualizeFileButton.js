@@ -15,9 +15,7 @@ function VisualizeFileButton({documentId}) {
     return (
         
         <Button onClick={visualizeFile} variant="link" className="p-1">
-            <object data={pdfUrl} type="application/pdf" width="100%" height="500px">
-                <a href={pdfUrl} target="_blank"><img src={eye} alt="visualize"></img></a>
-            </object>
+            <a href={pdfUrl} target="_blank"><img src={eye} alt="visualize"></img></a>
         </Button>
     );
 }

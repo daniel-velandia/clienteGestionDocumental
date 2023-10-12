@@ -29,7 +29,7 @@ function FilterDocumentsForm({callback}) {
     return (
         <div>
             <div className='d-flex flex-row-reverse'>
-                <Button variant="link" onClick={handleShow}>
+                <Button className="my-3" variant="link" onClick={handleShow}>
                     <img src={filterIcon} alt='search' />
                 </Button>
             </div>

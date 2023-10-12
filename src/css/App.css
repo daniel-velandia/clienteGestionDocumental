@@ -1,13 +1,50 @@
 
-body {
-    font-family: source;
-}
-.logo {
+.my-logo {
     width: 120px;
 }
 
 .my-color {
     background-color: #d94350 !important;
+}
+
+.my-bg-red {
+    background-color: #d94350 !important;
+}
+
+.my-badge-reply {
+    background-color: #d94350;
+}
+
+.my-badge-delivery {
+    background-color: #82b464;
+}
+
+.my-badge {
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.my-border-none {
+    border: none !important;
+}
+
+.my-color-text-title {
+    color: #bbbbbb !important;
+}
+
+.my-card-title {
+    font-size: 20px;
+}
+
+.my-mt-container {
+    margin-top: 80px;
+}
+
+.my-icon-card {
+    height: 24px;
+    width: 24px;
+    align-self: center;
 }
 
 .form-control, .form-select {
@@ -34,17 +71,4 @@ body {
 
 .dropdown-menu {
     left: -250% !important;
-}
-
-.my-border-none {
-    border: none !important;
-}
-
-.card-title {
-    color: #bbbbbb !important;
-    font-size: 24px;
-}
-
-.my-shadow {
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 }

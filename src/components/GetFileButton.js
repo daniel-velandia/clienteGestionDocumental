@@ -19,11 +19,12 @@ function GetFileButton({errors, fileCallback, nameCallback}) {
     const handleFileChange = (e) => {
 
         const file = e.target.files[0];
+        const name = file.name.slice(0, file.name.lastIndexOf("."));
 
         convertToByteArray(file)
         .then(pdfBlob => {
             fileCallback(pdfBlob);
-            nameCallback(file.name)
+            nameCallback(name);
         })
 
     }
