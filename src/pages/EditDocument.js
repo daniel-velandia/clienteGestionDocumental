@@ -1,16 +1,24 @@
 import validator from "validator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { CreateDocumentForm } from "../components/CreateDocumentForm";
+import { findDocumentById, updateDocumentById } from "../FakeApi/document";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
-import { createDocument } from "../FakeApi/document";
-import { toast } from "react-toastify";
+import { useLocation, useParams } from "react-router-dom";
 
-function CreateDocument() {
 
+function EditDocument() {
+
+    const {id} = useParams();
+    const [currentDocument, setCurrentDocument] = useState(null);
     const [errors, setErrors] = useState({});
+    const location = useLocation();
 
-    async function create({document}) {
+    useEffect(() => {
+        setCurrentDocument(findDocumentById(parseInt(id)));
+    }, [id, location])
+
+    async function edit({document}) {
 
         const error = {};
 
@@ -54,11 +62,8 @@ function CreateDocument() {
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            createDocument(document);
+            updateDocumentById(currentDocument.documentId, document);
             setErrors({});
-            toast.info("Operación exitosa", {
-                position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000
-            });
         }
     };
 
@@ -66,12 +71,30 @@ function CreateDocument() {
         <Container className="my-mt-container mb-3">
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
-                    <h2 className="my-3 text-center">Crear documento</h2>
-                    <CreateDocumentForm errors={errors} callback={create} />
+                    <h2 className="my-3 text-center">Editar documento</h2>
+                    {
+                        currentDocument &&
+                            <CreateDocumentForm
+                                errors={errors}
+                                callback={edit}
+                                currentFile={currentDocument.file}
+                                currentName={`${document.name}.pdf`}
+                                currentRegistrationNumber={currentDocument.registrationNumber}
+                                currentTypeRegistration={currentDocument.typeRegistration}
+                                currentTypeDocument={currentDocument.typeDocument}
+                                currentSubject={currentDocument.subject}
+                                currentAnnexes={currentDocument.annexes}
+                                currentRequiresResponse={currentDocument.requiresResponse}
+                                currentStudentSender={currentDocument.studentSender}
+                                currentCompanySender={currentDocument.companySender}
+                                currentaddresseer={currentDocument.addresseer}
+                                currentResponseDocument={currentDocument.responseDocument}
+                                currentInformAddresseer={currentDocument.informAddresseer} />
+                    }
                 </Col>
             </Row>
         </Container>
     );
 }
 
-export { CreateDocument };
+export { EditDocument };

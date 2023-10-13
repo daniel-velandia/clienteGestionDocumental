@@ -7,21 +7,36 @@ import { GetDocumentsSelect } from "./GetDocumentsSelect";
 import { GetFileButton } from "./GetFileButton";
 import { Document } from "../models/Document";
 
-function CreateDocumentForm({errors, callback}) {
+function CreateDocumentForm({
+                    errors, 
+                    callback,
+                    currentFile = [],
+                    currentName = "",
+                    currentRegistrationNumber = "",
+                    currentTypeRegistration = true,
+                    currentTypeDocument = "",
+                    currentSubject = "",
+                    currentAnnexes = "",
+                    currentRequiresResponse = false,
+                    currentStudentSender = "",
+                    currentCompanySender = "",
+                    currentaddresseer = "",
+                    currentResponseDocument = "",
+                    currentInformAddresseer = false}) {
 
-    const [file, setFile] = useState([]);
-    const [name, setName] = useState("");
-    const [registrationNumber, setRegistrationNumber] = useState("");
-    const [typeRegistration, setTypeRegistration] = useState(true);
-    const [typeDocument, setTypeDocument] = useState("");
-    const [subject, setSubject] = useState("");
-    const [annexes, setAnnexes] = useState("");
-    const [requiresResponse, setRequiresResponse] = useState(false);
-    const [studentSender, setStudentSender] = useState("");
-    const [companySender, setCompanySender] = useState("");
-    const [addresseer, setAddresseer] = useState("");
-    const [responseDocument, setResponseDocument] = useState("");
-    const [informAddressee, setInformAddressee] = useState(false);
+    const [file, setFile] = useState(currentFile);
+    const [name, setName] = useState(currentName);
+    const [registrationNumber, setRegistrationNumber] = useState(currentRegistrationNumber);
+    const [typeRegistration, setTypeRegistration] = useState(currentTypeRegistration);
+    const [typeDocument, setTypeDocument] = useState(currentTypeDocument);
+    const [subject, setSubject] = useState(currentSubject);
+    const [annexes, setAnnexes] = useState(currentAnnexes);
+    const [requiresResponse, setRequiresResponse] = useState(currentRequiresResponse);
+    const [studentSender, setStudentSender] = useState(currentStudentSender);
+    const [companySender, setCompanySender] = useState(currentCompanySender);
+    const [addresseer, setAddresseer] = useState(currentaddresseer);
+    const [responseDocument, setResponseDocument] = useState(currentResponseDocument);
+    const [informAddresseer, setInformAddresseer] = useState(currentInformAddresseer);
 
     const send = (e) => {
         e.preventDefault();
@@ -163,10 +178,10 @@ function CreateDocumentForm({errors, callback}) {
                     <Form.Check 
                         className="mb-4" 
                         type="switch"
-                        id="informAddressee"
-                        label="Informar al encargado"
-                        checked={informAddressee}
-                        onChange={e => setInformAddressee(!informAddressee)} />
+                        id="informAddresseer"
+                        label="Informar al destinatario"
+                        checked={informAddresseer}
+                        onChange={e => setInformAddresseer(!informAddresseer)} />
                 </Col>
                 <Col sm="12">
                     <Button type="submit" className="mt-3 my-color my-border-none p-3 w-100">

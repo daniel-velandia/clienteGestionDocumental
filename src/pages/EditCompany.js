@@ -1,16 +1,23 @@
 import validator from "validator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { CreateCompanyForm } from "../components/CreateCompanyForm";
+import { findCompanyById, updateCompanyById } from "../FakeApi/company";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
-import { createCompany } from "../FakeApi/company";
-import { toast } from "react-toastify";
+import { useLocation, useParams } from "react-router-dom";
 
-function CreateCompany() {
+function EditCompany() {
 
+    const {id} = useParams();
+    const [currentCompany, setCurrentCompany] = useState(null);
     const [errors, setErrors] = useState({});
+    const location = useLocation();
 
-    async function create({company}) {
+    useEffect(() => {
+        setCurrentCompany(findCompanyById(parseInt(id)));
+    }, [id, location])
+
+    async function edit({company}) {
 
         const error = {};
 
@@ -37,11 +44,8 @@ function CreateCompany() {
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            createCompany(company);
+            updateCompanyById(currentCompany.companyId, company);
             setErrors({});
-            toast.info("Operación exitosa", {
-                position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000
-            });
         }
     };
 
@@ -49,12 +53,22 @@ function CreateCompany() {
         <Container className="my-mt-container mb-3">
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
-                    <h2 className="my-3 text-center">Crear empresa</h2>
-                    <CreateCompanyForm errors={errors} callback={create} />
+                    <h2 className="my-3 text-center">Editar compañia</h2>
+                    {
+                        currentCompany &&
+                            <CreateCompanyForm
+                                errors={errors}
+                                callback={edit}
+                                currentCompanyName={currentCompany.companyName}
+                                currentNit={currentCompany.nit}
+                                currentEmail={currentCompany.email}
+                                currentPhone={currentCompany.phone}
+                                currentSenderName={currentCompany.senderName}/>
+                    }
                 </Col>
             </Row>
         </Container>
     );
 }
 
-export { CreateCompany };
+export { EditCompany };

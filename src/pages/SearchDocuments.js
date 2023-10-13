@@ -1,10 +1,11 @@
 import validator from "validator";
 import { useEffect, useState } from "react";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { FilterDocumentsForm } from "../components/FilterDocumentsForm";
 import { DocumentCard } from "../components/DocumentCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import { readDocuments } from "../FakeApi/document";
+import { NoDocuments } from "../components/NoDocuments";
 
 function SearchDocuments() {
     
@@ -54,12 +55,15 @@ function SearchDocuments() {
                     <h2 className="my-3">Documentos encontrados</h2>
                 </Col>
                 <Col xs="2" className="align-self-center">
-                    {errors.new && <Alert variant="danger">{errors.new}</Alert>}
                     <FilterDocumentsForm callback={search} />
                 </Col>
             </Row>
             <Row>
-                {documents.map(document => <DocumentCard key={document.documentId} document={document} />)}
+                {
+                    (documents.length > 0) ? 
+                        documents.map(document => <DocumentCard key={document.documentId} document={document} />) :
+                        <NoDocuments />
+                }
             </Row>
         </Container>
     );

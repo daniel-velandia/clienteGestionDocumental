@@ -1,16 +1,23 @@
 import validator from "validator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { CreateStudentForm } from "../components/CreateStudentForm";
-import { createStudent } from "../FakeApi/student";
+import { findStudentById, updateStudentById } from "../FakeApi/student";
 import { isEmptyObject } from "../connections/helpers/isEmptyObject";
-import { toast } from "react-toastify";
+import { useLocation, useParams } from "react-router-dom";
 
-function CreateStudent() {
+function EditStudent() {
 
+    const {id} = useParams();
+    const [currentStudent, setCurrentStudent] = useState(null);
     const [errors, setErrors] = useState({});
+    const location = useLocation();
 
-    async function create({student}) {
+    useEffect(() => {
+        setCurrentStudent(findStudentById(parseInt(id)));
+    }, [id, location])
+
+    async function edit({student}) {
 
         const error = {};
 
@@ -45,11 +52,8 @@ function CreateStudent() {
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            createStudent(student);
-            setErrors({});
-            toast.info("Operación exitosa", {
-                position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000
-            });
+            updateStudentById(currentStudent.studentId, student);
+            setErrors({})
         }
     };
 
@@ -57,12 +61,24 @@ function CreateStudent() {
         <Container className="my-mt-container mb-3">
             <Row className="justify-content-center">
                 <Col sm="12" md="8" lg="6">
-                    <h2 className="my-3 text-center">Crear estudiante</h2>
-                    <CreateStudentForm errors={errors} callback={create} />
+                    <h2 className="my-3 text-center">Editar estudiante</h2>
+                    {
+                        currentStudent &&
+                            <CreateStudentForm
+                                errors={errors}
+                                callback={edit}
+                                currentIdentification={currentStudent.identification}
+                                currentName={currentStudent.name}
+                                currentLastName={currentStudent.lastName}
+                                currentEmail={currentStudent.email}
+                                currentPhone={currentStudent.phone}
+                                currentCareer={currentStudent.career}
+                                currentSemester={currentStudent.semester} />
+                    }
                 </Col>
             </Row>
         </Container>
     );
 }
 
-export { CreateStudent };
+export { EditStudent };

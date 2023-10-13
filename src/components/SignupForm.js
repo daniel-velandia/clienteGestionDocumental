@@ -1,30 +1,21 @@
 import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
-import { Student } from "../models/Student";
+import { UserSignup } from "../models/User";
 
-function CreateStudentForm({
-                    errors, 
-                    callback, 
-                    currentIdentification = "",
-                    currentName = "",
-                    currentLastName = "",
-                    currentEmail = "",
-                    currentPhone = "",
-                    currentCareer = "",
-                    currentSemester = ""}) {
+function SignupForm({errors, callback}) {
 
-    const [identification, setIdentification] = useState(currentIdentification);
-    const [name, setName] = useState(currentName);
-    const [lastName, setLastName] = useState(currentLastName);
-    const [email, setEmail] = useState(currentEmail);
-    const [phone, setPhone] = useState(currentPhone);
-    const [career, setCareer] = useState(currentCareer);
-    const [semester, setSemester] = useState(currentSemester);
+    const [identification, setIdentification] = useState("");
+    const [name, setName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [appPassword, setAppPassword] = useState("");
 
     const send = (e) => {
         e.preventDefault();
-        const student = new Student(identification, name, lastName, email, phone, career, semester);
-        callback({student});
+        const user = new UserSignup(identification, name, lastName, email, username, password, appPassword);
+        callback({user});
     }
 
     return (
@@ -96,62 +87,52 @@ function CreateStudentForm({
                 </Col>
                 <Col md="6" xs="12">
                     <FloatingLabel
-                        controlId="phone"
-                        label="Telefono"
+                        controlId="username"
+                        label="nombre de usuario"
                         className="mb-4">
                         <Form.Control 
-                            placeholder="Telefono"
-                            type="number"
-                            value={phone}
-                            onChange={e => setPhone(e.target.value)}
-                            isInvalid={errors.phone} />
+                            placeholder="nombre de usuario"
+                            type="text"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            isInvalid={errors.username} />
                         <Form.Control.Feedback type="invalid">
-                            {errors.phone}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel controlId="career" label="Carrera" className="mb-4">
-                        <Form.Select 
-                            value={career} 
-                            onChange={e => setCareer(e.target.value)} 
-                            isInvalid={errors.career}>
-                            <option value=''>Seleccione una carrera</option>
-                            <option value='Diseño gráfico'>Diseño gráfico</option>
-                            <option value='Administración de empresas'>Administración de empresas</option>
-                            <option value='Hoteleria y turismo'>Hoteleria y turismo</option>
-                            <option value='Ingenieria de software'>Ingenieria de software</option>
-                            <option value='Negocios internacionales'>Negocios internacionales</option>
-                            <option value='Administración financiera'>Administración financiera</option>
-                            <option value='Negocios internacionales distancia'>Negocios internacionales distancia</option>
-                            <option value='Gestión logístaca empresarial'>Gestión logístaca empresarial</option>
-                        </Form.Select>
-                        <Form.Control.Feedback type='invalid'>
-                            {errors.career}
+                            {errors.username}
                         </Form.Control.Feedback>
                     </FloatingLabel>
                 </Col>
                 <Col md="6" xs="12">
                     <FloatingLabel
-                        controlId="semester"
-                        label="Semestre"
+                        controlId="password"
+                        label="contraseña"
                         className="mb-4">
                         <Form.Control 
-                            placeholder="Semestre"
-                            type="number"
-                            value={semester}
-                            onChange={e => setSemester(e.target.value)}
-                            isInvalid={errors.semester} 
-                            min={1}
-                            max={10} />
+                            placeholder="contraseña"
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            isInvalid={errors.password} 
+                            min={8} />
                         <Form.Control.Feedback type="invalid">
-                            {errors.semester}
+                            {errors.password}
                         </Form.Control.Feedback>
+                    </FloatingLabel>
+                </Col>
+                <Col md="6" xs="12">
+                    <FloatingLabel
+                        controlId="appPassword"
+                        label="contraseña de aplicación"
+                        className="mb-4">
+                        <Form.Control 
+                            placeholder="contraseña de aplicación"
+                            type="password"
+                            value={appPassword}
+                            onChange={e => setAppPassword(e.target.value)} />
                     </FloatingLabel>
                 </Col>
                 <Col sm="12">
                     <Button type="submit" className="mt-3 my-color my-border-none p-3 w-100">
-                        Crear estudiante
+                        Registrarse
                     </Button>
                 </Col>
             </Row>
@@ -159,4 +140,4 @@ function CreateStudentForm({
     );
 }
 
-export { CreateStudentForm };
+export { SignupForm };

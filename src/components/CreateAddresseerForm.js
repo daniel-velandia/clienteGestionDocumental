@@ -2,15 +2,24 @@ import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
 import { Addresseer } from "../models/Addresseer";
 
-function CreateAddresseerForm({errors, callback}) {
+function CreateAddresseerForm({
+                    errors, 
+                    callback, 
+                    currentIdentification = "",
+                    currentName = "",
+                    currentLastName = "",
+                    currentEmail = "",
+                    currentPhone = "",
+                    currentCharge = "",
+                    currentArea = ""}) {
 
-    const [identification, setIdentification] = useState("");
-    const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [charge, setCharge] = useState("");
-    const [area, setArea] = useState("");
+    const [identification, setIdentification] = useState(currentIdentification);
+    const [name, setName] = useState(currentName);
+    const [lastName, setLastName] = useState(currentLastName);
+    const [email, setEmail] = useState(currentEmail);
+    const [phone, setPhone] = useState(currentPhone);
+    const [charge, setCharge] = useState(currentCharge);
+    const [area, setArea] = useState(currentArea);
 
     const send = (e) => {
         e.preventDefault();

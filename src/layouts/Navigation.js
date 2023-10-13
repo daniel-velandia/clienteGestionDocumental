@@ -1,14 +1,15 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown, Row, Col, Form, InputGroup, Button } from "react-bootstrap";
 import searchIcon from "../assets/images/search.png";
 import logo from '../assets/images/logo.png';
 import validator from 'validator';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Navigation() {
 
     const [sender, setSender] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
 
     const search = (e) => {
         e.preventDefault();
@@ -19,6 +20,12 @@ function Navigation() {
             navigate("/");
         }
     }
+
+    useEffect(() => {
+        if(location.pathname != "/" && !validator.isEmpty(sender)) {
+            setSender("");
+        }
+    }, [location])
 
     return (
         <Navbar expand="lg" fixed="top" bg="light" data-bs-theme="light">

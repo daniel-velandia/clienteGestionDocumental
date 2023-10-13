@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { findDocumentById } from "../FakeApi/document";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import sender from "../assets/images/sender.png";
-import addresseer from "../assets/images/addresser.png";
-import file from "../assets/images/file.png";
 import edit from "../assets/images/edit.png";
 import { DownloadFileButton } from "../components/DownloadFileButton";
 import { VisualizeFileButton } from "../components/VisualizeFileButton";
@@ -14,11 +11,11 @@ function DetailDocument() {
 
     const [document, setDocument] = useState({});
     const {id} = useParams();
+    const location = useLocation();
     
     useEffect(() => {
-        const document = findDocumentById(parseInt(id));
-        setDocument(document);
-    });
+        setDocument(findDocumentById(parseInt(id)));
+    }, [id, location]);
 
     return (
         <Container className="my-mt-container mb-3">
@@ -55,32 +52,54 @@ function DetailDocument() {
                             <Card.Text>
                                 {document.annexes}
                             </Card.Text>
-                            <div className="d-flex mb-1">
-                                <img className="my-icon-card" src={sender} alt="destinatario" />
-                                {
-                                    document.studentSender ? 
-                                        <Card.Text as={NavLink} to={`/student/${document.studentSender}`} className="ms-2 align-self-center">
+                            <Card.Text className="my-color-text-title mb-0">
+                                Remitente
+                            </Card.Text>
+                            {
+                                document.studentSender ?
+                                <div className="mb-3">
+                                    <Card.Text 
+                                        as={NavLink} 
+                                        to={`/student/${document.studentSender}`}
+                                        className="text-decoration-none text-black">
                                             {document.studentSender}
-                                        </Card.Text> : 
-                                        <Card.Text as={NavLink} to={`/company/${document.companySender}`} className="ms-2 align-self-center">
+                                    </Card.Text>
+                                </div>: 
+                                <div className="mb-3">
+                                    <Card.Text 
+                                        as={NavLink} 
+                                        to={`/company/${document.companySender}`}
+                                        className="text-decoration-none text-black">
                                             {document.companySender}
-                                        </Card.Text>
-                                }
-                            </div>
-                            <div className="d-flex mb-1">
-                                <img className="my-icon-card" src={addresseer} alt="destinatario" />
-                                <Card.Text as={NavLink} to={`/addresseer/${document.addresseer}`} className="ms-2 align-self-center">
+                                    </Card.Text>
+                                </div>
+                            }
+                            <Card.Text className="my-color-text-title mb-0">
+                                Destinatario
+                            </Card.Text>
+                            <div className="mb-3">
+                                <Card.Text 
+                                        as={NavLink} 
+                                        to={`/addresseer/${document.addresseer}`} 
+                                        className="text-decoration-none text-black">
                                     {document.addresseer}
                                 </Card.Text>
                             </div>
                             {
                                 !document.typeRegistration &&
-                                <div className="d-flex mb-1">
-                                    <img className="my-icon-card" src={file} alt="destinatario" />
-                                    <Card.Text as={NavLink} to={`/document/${document.responseDocument}`} className="ms-2 align-self-center">
-                                        {document.responseDocument}
-                                    </Card.Text>
-                                </div>
+                                    <div>
+                                        <Card.Text className="my-color-text-title mb-0">
+                                            Documento respondido
+                                        </Card.Text>
+                                        <div className="mb-3">
+                                            <Card.Text 
+                                                as={NavLink} 
+                                                to={`/document/${document.responseDocument}`} 
+                                                className="text-decoration-none text-black">
+                                                {document.responseDocument}
+                                            </Card.Text>
+                                        </div>
+                                    </div>
                             }
                             <div className="d-flex justify-content-between mt-2">
                                 <div>

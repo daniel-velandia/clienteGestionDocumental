@@ -2,17 +2,24 @@ import { useState } from "react";
 import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
 import { Company } from "../models/Company";
 
-function CreateCompanyForm({errors, callback}) {
+function CreateCompanyForm({
+                    errors, 
+                    callback,
+                    currentCompanyName = "",
+                    currentNit = "",
+                    currentEmail = "",
+                    currentPhone = "",
+                    currentSenderName = "",}) {
 
-    const [companyName, setCompanyName] = useState("");
-    const [nit, setNit] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [assistantName, setAssistantName] = useState("");
+    const [companyName, setCompanyName] = useState(currentCompanyName);
+    const [nit, setNit] = useState(currentNit);
+    const [email, setEmail] = useState(currentEmail);
+    const [phone, setPhone] = useState(currentPhone);
+    const [senderName, setSenderName] = useState(currentSenderName);
 
     const send = (e) => {
         e.preventDefault();
-        const company = new Company(companyName, nit, email, phone, assistantName);
+        const company = new Company(companyName, nit, email, phone, senderName);
         callback({company});
     }
 
@@ -85,17 +92,17 @@ function CreateCompanyForm({errors, callback}) {
                 </Col>
                 <Col md="6" xs="12">
                     <FloatingLabel
-                        controlId="assistantName"
+                        controlId="senderName"
                         label="Nombre de asistente"
                         className="mb-4">
                         <Form.Control 
                             placeholder="Nombre de asistente"
                             type="text"
-                            value={assistantName}
-                            onChange={e => setAssistantName(e.target.value)}
-                            isInvalid={errors.assistantName} />
+                            value={senderName}
+                            onChange={e => setSenderName(e.target.value)}
+                            isInvalid={errors.senderName} />
                         <Form.Control.Feedback type="invalid">
-                            {errors.assistantName}
+                            {errors.senderName}
                         </Form.Control.Feedback>
                     </FloatingLabel>
                 </Col>
