@@ -7,7 +7,7 @@ function SigninForm({errors, callback}) {
     const [username, setUsername] = useState("");
     const [password, setPasword] = useState("");
 
-    const send = (e) => {
+    const send = e => {
         e.preventDefault();
         const user = new UserSignin(username, password);
         callback({user});

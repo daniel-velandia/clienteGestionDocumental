@@ -1,0 +1,35 @@
+
+.my-card-title {
+    font-size: 20px !important;
+    text-decoration: none !important;
+    padding-left: 0px !important;
+}
+
+.my-color-text-title {
+    color: #bbbbbb !important;
+}
+
+.my-h-img {
+    height: 55vh;
+}
+
+.my-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.my-mt-breadcrum {
+    margin-top: 2px;
+}
+
+.my-mt-link {
+    margin-top: -4px;
+}
+
+.form-control, .form-select {
+    background-color: #eeeeee !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}

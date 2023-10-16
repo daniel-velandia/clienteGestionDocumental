@@ -12,7 +12,7 @@ function SignupForm({errors, callback}) {
     const [password, setPassword] = useState("");
     const [appPassword, setAppPassword] = useState("");
 
-    const send = (e) => {
+    const send = e => {
         e.preventDefault();
         const user = new UserSignup(identification, name, lastName, email, username, password, appPassword);
         callback({user});
