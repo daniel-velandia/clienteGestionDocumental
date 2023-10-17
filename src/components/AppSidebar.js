@@ -17,7 +17,7 @@ const AppSidebar = () => {
       visible={sidebarShow}
     >
       <CSidebarBrand className="d-md-flex" to="/">
-        <CImage src={logo} height={40} alt="logo sidebar" />
+        <CImage src={logo} height={40} alt="logo" />
       </CSidebarBrand>
       <CSidebarNav>
           <AppSidebarNav items={items} />
