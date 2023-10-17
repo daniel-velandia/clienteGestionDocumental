@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { findStudentById } from "../../connections/FakeApi/student";
 import { DeleteStudentButton } from "../../components/students/DeleteStudentButton";
-import { CBadge, CButton, CCard, CCardBody, CCardText, CCardTitle, CCol, CRow } from "@coreui/react";
+import { CButton, CCard, CCardBody, CCardHeader, CCol, CListGroup, CListGroupItem, CRow } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilPencil } from "@coreui/icons";
 
@@ -19,56 +19,47 @@ const DetailStudent = () => {
 
     return (
         <CRow className="justify-content-center mb-4">
-            <CCol sm={12} md={6} lg={4}>
-                {
-                    student &&
-                        <CCard>
-                        <CCardBody>
-                            <CCardTitle className="my-color-text-title mb-3">
-                                {student.name} {student.lastName}
-                            </CCardTitle>
-                            <CRow className="flex-column-reverse flex-sm-row">
-                                <CCol xs={12} sm={8}>
-                                    <CCardText className="my-color-text-title mb-0">
-                                        Estudio
-                                    </CCardText>
-                                    <CCardText className="mb-3">
-                                        {student.career} - semestre {student.semester}
-                                    </CCardText>
-                                </CCol>
-                                <CCol xs={12} sm={4} className="d-flex align-items-center justify-content-sm-end">
-                                    <CBadge color="danger"className="mb-3 mx-1">D.I {student.identification}</CBadge>
-                                </CCol>
-                            </CRow>
-                            <CRow>
-                                <CCol xs={12} sm={8}>
-                                    <CCardText className="my-color-text-title mb-0">
-                                        Correo
-                                    </CCardText>
-                                    <CCardText className="mb-3">
-                                        {student.email}
-                                    </CCardText>
-                                </CCol>
-                                <CCol xs={12} sm={4}>
-                                    <CCardText className="my-color-text-title mb-0">
-                                        Telefono
-                                    </CCardText>
-                                    <CCardText className="mb-3">
-                                        {student.phone}
-                                    </CCardText>
-                                </CCol>
-                            </CRow>
-                            <div className="d-flex">
-                                <CButton component={NavLink} 
-                                        to={`/students/edit?q=${student.studentId}`} 
-                                        color="link" >
-                                    <CIcon icon={cilPencil} size="xl" className="text-danger"/>
-                                </CButton>
-                                <DeleteStudentButton student={student} />
-                            </div>
-                        </CCardBody>
-                    </CCard>
-                }
+            <CCol xs={12} sm={6}>
+            {student && 
+                <CCard>
+                <CCardHeader className="bg-danger text-white">
+                    <CRow className="align-items-center">
+                    <CCol xs={12} sm={7}>
+                        <h5 className="mb-0">{student.name} {student.lastName}</h5>
+                    </CCol>
+                    <CCol xs={12} sm={5} className="d-flex justify-content-sm-end mt-3 mt-sm-0">
+                        <CButton
+                        component={NavLink}
+                        to={`/students/edit?q=${student.studentId}`}
+                        color="linck"
+                        >
+                        <CIcon icon={cilPencil} size="xl" className="text-white" />
+                        </CButton>
+                        <DeleteStudentButton student={student} />
+                    </CCol>
+                    </CRow>
+                </CCardHeader>
+                <CCardBody>
+                    <CListGroup flush>
+                    <CListGroupItem>
+                        <strong>D.I:</strong> {student.identification}
+                    </CListGroupItem>
+                    <CListGroupItem>
+                        <strong>Carrera:</strong> {student.career}
+                    </CListGroupItem>
+                    <CListGroupItem>
+                        <strong>Semestre:</strong> {student.semester}
+                    </CListGroupItem>
+                    <CListGroupItem>
+                        <strong>Correo:</strong> {student.email}
+                    </CListGroupItem>
+                    <CListGroupItem>
+                        <strong>Teléfono:</strong> {student.phone}
+                    </CListGroupItem>
+                    </CListGroup>
+                </CCardBody>
+                </CCard>
+            }
             </CCol>
         </CRow>
     );

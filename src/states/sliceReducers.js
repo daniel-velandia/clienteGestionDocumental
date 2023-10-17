@@ -1,19 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-  sidebarShow: false,
-}
-
-
 const sliceReducers = createSlice({
-    name: 'sidebar',
-    initialState,
-    reducers:{
-        sidebarShowReducer: (state, action)=>{
-            state.sidebarShow= action.payload.sidebarShow
+        name: 'sidebar',
+        initialState: {
+            sidebarShow: false
+        },
+        reducers:{
+            sidebarShowReducer: (state, action)=>{
+                state.sidebarShow= action.payload.sidebarShow
+            }
         }
-    }
 })
 
-export const {sidebarShowReducer} = sliceReducers.actions
+export const { sidebarShowReducer } = sliceReducers.actions
 export default sliceReducers.reducer

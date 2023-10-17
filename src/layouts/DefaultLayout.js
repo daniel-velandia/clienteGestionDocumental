@@ -1,7 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { sidebarShowReducer } from '../states/sliceReducers'
 
 const DefaultLayout = () => {
+
+  const connected = useSelector(state => state.acount.connected)
+  const navigation = useNavigate();
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(!connected) {
+      navigation("/signin");
+    }
+
+    window.addEventListener('resize', () => {
+      const windowWidht = window.innerWidth;
+      if(windowWidht > 767) {
+        dispatch(sidebarShowReducer({ sidebarShow: false }))
+      }
+    });
+
+  }, [navigation, connected])
+
   return (
     <div>
       <AppSidebar />

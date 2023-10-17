@@ -9,7 +9,7 @@ import items from '../utils/sidebarnav'
 
 
 const AppSidebar = () => {
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  const sidebarShow = useSelector((state) => state.slice.sidebarShow)
 
   return (
     <CSidebar

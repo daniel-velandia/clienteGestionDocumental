@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { CButton, CCol, CForm, CFormInput, CFormLabel, CRow } from "@coreui/react";
+import { CButton, CCol, CForm, CFormInput, CInputGroup, CInputGroupText, CRow } from "@coreui/react";
 import { isEmptyObject } from "../../connections/helpers/isEmptyObject";
+import CIcon from "@coreui/icons-react";
+import { cilAt, cilBarcode, cilBuilding, cilPhone, cilUser } from "@coreui/icons";
 
 const CreateCompanyForm = ({
                     errors, 
@@ -62,79 +64,89 @@ const CreateCompanyForm = ({
         >
             <CRow>
                 <CCol md={6} xs={12}>
-                    <CFormLabel htmlFor="nit" className='mt-3'>
-                        Nit
-                    </CFormLabel>
-                    <CFormInput
-                        type="text"
-                        id="nit"
-                        placeholder="nit"
-                        aria-describedby="nit"
-                        feedbackInvalid={errors.nit}
-                        invalid={errors.isNitInvalid}
-                        value={nit}
-                        onChange={e => setNit(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilBarcode} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="nit"
+                            type="text"
+                            placeholder="nit"
+                            aria-describedby="nit"
+                            feedbackInvalid={errors.nit}
+                            invalid={errors.isNitInvalid}
+                            value={nit}
+                            onChange={e => setNit(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md={6} xs={12}>
-                    <CFormLabel htmlFor="companyName" className='mt-3'>
-                        Nombre de compañia
-                    </CFormLabel>
-                    <CFormInput
-                        type="text"
-                        id="companyName"
-                        placeholder="nombre de compañia"
-                        aria-describedby="nombre de compañia"
-                        feedbackInvalid={errors.companyName}
-                        invalid={errors.isCompanyNameInvalid}
-                        value={companyName}
-                        onChange={e => setCompanyName(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilBuilding} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="companyName"
+                            type="text"
+                            placeholder="nombre de compañia"
+                            aria-describedby="nombre de compañia"
+                            feedbackInvalid={errors.companyName}
+                            invalid={errors.isCompanyNameInvalid}
+                            value={companyName}
+                            onChange={e => setCompanyName(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md={6} xs={12}>
-                    <CFormLabel htmlFor="email" className='mt-3'>
-                        Correo
-                    </CFormLabel>
-                    <CFormInput
-                        type="email"
-                        id="email"
-                        placeholder="correo"
-                        aria-describedby="correo"
-                        feedbackInvalid={errors.email}
-                        invalid={errors.isEmailInvalid}
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilAt} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="email"
+                            type="email"
+                            placeholder="correo"
+                            aria-describedby="correo"
+                            feedbackInvalid={errors.email}
+                            invalid={errors.isEmailInvalid}
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md={6} xs={12}>
-                    <CFormLabel htmlFor="phone" className='mt-3'>
-                        Telefono
-                    </CFormLabel>
-                    <CFormInput
-                        type="number"
-                        id="phone"
-                        placeholder="telefono"
-                        aria-describedby="telefono"
-                        feedbackInvalid={errors.phone}
-                        invalid={errors.isPhoneInvalid}
-                        value={phone}
-                        onChange={e => setPhone(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilPhone} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="phone"
+                            type="number"
+                            placeholder="telefono"
+                            aria-describedby="telefono"
+                            feedbackInvalid={errors.phone}
+                            invalid={errors.isPhoneInvalid}
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md={6} xs={12}>
-                    <CFormLabel htmlFor="senderName" className='mt-3'>
-                        Nombre de remitente
-                    </CFormLabel>
-                    <CFormInput
-                        type="text"
-                        id="senderName"
-                        placeholder="nombre de remitente"
-                        aria-describedby="nombre de remitente"
-                        feedbackInvalid={errors.senderName}
-                        invalid={errors.isSenderNameInvalid}
-                        value={senderName}
-                        onChange={e => setSenderName(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilUser} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="senderName"
+                            type="text"
+                            placeholder="nombre de remitente"
+                            aria-describedby="nombre de remitente"
+                            feedbackInvalid={errors.senderName}
+                            invalid={errors.isSenderNameInvalid}
+                            value={senderName}
+                            onChange={e => setSenderName(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol sm={12}>
                     <CButton type="submit" color="danger" className="mt-3 text-white w-100">

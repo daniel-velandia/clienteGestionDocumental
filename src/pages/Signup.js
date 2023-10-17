@@ -1,61 +1,84 @@
-import validator from "validator";
-import { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import { SignupForm } from "../components/SignupForm";
-import { isEmptyObject } from "../connections/helpers/isEmptyObject";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { CCard, CCardBody, CCol, CContainer, CRow } from '@coreui/react'
+import { useState } from 'react'
+import validator from 'validator'
+import { isEmptyObject } from '../connections/helpers/isEmptyObject'
+import { useNavigate } from 'react-router-dom'
+import { SignupForm } from '../components/SignupForm'
+import { useDispatch } from 'react-redux'
+import { userReducer } from '../states/userReducers'
 
-function Signup() {
-
+const Signup = () => {
+    
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate();
 
-    async function singup({user}) {
+    const navigation = useNavigate();
+    const dispatch = useDispatch();
+
+    const signup = async ({user}) => {
 
         const error = {};
 
-        if(validator.isEmpty(user.identification)) {
-            error.identification = "El documento de identidad no puede estar vacio"
-        }
-
-        if(validator.isEmpty(user.name)) {
-            error.name = "El nombre no puede estar vacio"
-        }
-
-        if(validator.isEmpty(user.lastName)) {
-            error.lastName = "El apellido no puede estar vacio"
+        if(validator.isEmpty(user.username)) {
+            error.username = "El nombre de usuario no puede estar vacio";
+            error.isUsernameInvalid = true;
         }
 
         if(validator.isEmpty(user.email)) {
-            error.email = "El correo no puede estar vacio"
-        }
-
-        if(validator.isEmpty(user.username)) {
-            error.username = "El username no puede estar vacio"
+            error.email = "El correo no puede estar vacio";
+            error.isEmailInvalid = true;
         }
 
         if(validator.isEmpty(user.password)) {
-            error.password = "La contraseña no puede estar vacia"
+            error.password = "La contraseña no puede estar vacia";
+            error.isPasswordInvalid = true;
+        }
+
+        if(validator.isEmpty(user.repeatPassword)) {
+            error.repeatPassword = "Debe volver a ingresar la contraseña";
+            error.isRepeatPasswordInvalid = true;
+        }
+
+        if(user.password !== user.repeatPassword) {
+            error.repeatPassword = "Las contraseñas deben ser iguales";
+            error.isRepeatPasswordInvalid = true;
         }
 
         if(!isEmptyObject(error)) {
             setErrors(error);
         } else {
-            navigate("/signin")
-            setErrors({});
+
+            dispatch(userReducer({
+                connected: false,
+                user: {
+                    username: user.username,
+                    email: user.email,
+                    password: user.password
+                }
+            }))
+
+            navigation("/signin");
         }
-    };
+    }
 
     return (
-        <Container className="my-mt-container mb-3">
-            <Row className="justify-content-center">
-                <Col sm="12" md="8" lg="6">
-                    <h2 className="my-3 text-center">Registrarse</h2>
-                    <SignupForm errors={errors} callback={singup} />
-                </Col>
-            </Row>
-        </Container>
-    );
+        <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+            <CContainer>
+                <CRow className="justify-content-center">
+                    <CCol md={9} lg={7} xl={6}>
+                    <CCard className="mx-4">
+                        <CCardBody className="p-4">
+                            <SignupForm
+                                errors={errors}
+                                callback={signup}
+                            />
+                        </CCardBody>
+                    </CCard>
+                    </CCol>
+                </CRow>
+            </CContainer>
+        </div>
+    )
 }
 
-export { Signup };
+export default Signup

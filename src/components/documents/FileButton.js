@@ -1,4 +1,4 @@
-import { CFormInput, CFormLabel } from "@coreui/react";
+import { CFormInput } from "@coreui/react";
 
 const FileButton = ({errors, setFile, setName}) => {
 
@@ -20,7 +20,7 @@ const FileButton = ({errors, setFile, setName}) => {
 
         const file = e.target.files[0];
         
-        if(file != undefined || file != null) {
+        if(file !== undefined || file !== null) {
             const name = file.name.slice(0, file.name.lastIndexOf("."));
 
             convertToByteArray(file)
@@ -33,21 +33,14 @@ const FileButton = ({errors, setFile, setName}) => {
     }
 
     return (
-        <div className="mb-4">
-            <CFormLabel 
-                htmlFor="file" 
-                className='mt-3'
-            >
-                Archivo
-            </CFormLabel>
-            <CFormInput 
-                type="file" 
-                id="file"
-                onChange={e => handleFileChange(e)} 
-                feedbackInvalid={errors.file}
-                invalid={errors.isFileInvalid}
-            />
-        </div>
+        <CFormInput 
+            id="file"
+            type="file" 
+            onChange={e => handleFileChange(e)} 
+            feedbackInvalid={errors.file}
+            invalid={errors.isFileInvalid}
+            className="mb-3"
+        />
     )
 }
 export { FileButton };

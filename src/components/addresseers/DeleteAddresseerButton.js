@@ -19,7 +19,7 @@ const DeleteAddresseerButton = ({addresseer}) => {
   return (
     <div>
       <CButton color="link" onClick={() => setVisible(!visible)}>
-          <CIcon icon={cilTrash} size="xl" className="text-danger"/>
+          <CIcon icon={cilTrash} size="xl" className="text-white"/>
       </CButton>
       <CModal
           visible={visible}

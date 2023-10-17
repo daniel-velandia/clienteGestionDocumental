@@ -58,12 +58,12 @@ const EditCompany = () => {
 
     return (
         <CRow className="justify-content-center mb-3">
-            <CCol sm="12" md="8" lg="6">
+            <CCol sm={12} md={10} lg={8} xl={7}>
                 {
                     currentCompany &&
                         <CCard>
                             <CCardBody>
-                                <CCardTitle className="d-flex justify-content-center">
+                                <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                                     Editar compañia
                                 </CCardTitle>
                                 <CreateCompanyForm 

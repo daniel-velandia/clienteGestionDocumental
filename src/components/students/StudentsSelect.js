@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { readStudents } from "../../connections/FakeApi/student";
-import { CFormLabel, CFormSelect } from "@coreui/react";
+import { CFormSelect, CInputGroup, CInputGroupText } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import { cilUser } from "@coreui/icons";
 
 const StudentsSelect = ({errors, student, setStudent}) => {
 
@@ -31,20 +33,20 @@ const StudentsSelect = ({errors, student, setStudent}) => {
     }, []);
 
     return (
-        <div>
-            <CFormLabel htmlFor="sender" className='mt-3'>
-                Estudiantes
-            </CFormLabel>
-            <CFormSelect 
-                id='sender'
-                feedbackInvalid={errors.sender}
-                invalid={errors.isSenderInvalid}
-                aria-label="estudiante"
-                options={students}
-                value={student}
-                onChange={e => setStudent(e.target.value)}
-            />
-        </div>
+        <CInputGroup className="mb-4">
+            <CInputGroupText className="border-0">
+                <CIcon icon={cilUser} />
+            </CInputGroupText>
+                <CFormSelect 
+                    id="studentSender"
+                    feedbackInvalid={errors.sender}
+                    invalid={errors.isSenderInvalid}
+                    aria-label="estudiante"
+                    options={students}
+                    value={student}
+                    onChange={e => setStudent(e.target.value)}
+                />
+        </CInputGroup>
     );
 }
 

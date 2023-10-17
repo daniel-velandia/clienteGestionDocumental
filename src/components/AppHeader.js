@@ -10,9 +10,6 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
-  CForm,
-  CFormInput,
-  CButton,
   CImage,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -26,7 +23,7 @@ import { SearchDocumentsForm } from './documents/SearchDocumentsForm'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector((state) => state.sidebarShow)
+  const sidebarShow = useSelector(state => state.slice.sidebarShow)
 
   return (
     <CHeader position="sticky" className="mb-4">

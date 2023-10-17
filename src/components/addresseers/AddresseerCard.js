@@ -5,7 +5,7 @@ const AddresseerCard = ({addresseer}) => {
 
     return (
         <CCol md={6} lg={3}>
-            <CCard>
+            <CCard className="my-2">
             <CCardBody>
                 <CCardTitle className="text-truncate">
                     <CButton 

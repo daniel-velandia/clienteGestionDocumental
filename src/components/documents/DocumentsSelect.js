@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { readDocuments } from "../../connections/FakeApi/document";
-import { CFormLabel, CFormSelect } from "@coreui/react";
+import { CFormSelect, CInputGroup, CInputGroupText } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import { cilFile } from "@coreui/icons";
 
 const DocumentsSelect = ({errors, document, setDocument}) => {
 
@@ -32,18 +34,20 @@ const DocumentsSelect = ({errors, document, setDocument}) => {
 
     return (
         <div>
-            <CFormLabel htmlFor="document" className='mt-3'>
-                Documentos
-            </CFormLabel>
-            <CFormSelect 
-                id='document'
-                feedbackInvalid={errors.ResponseDocument}
-                invalid={errors.isResponseDocumentInvalid}
-                aria-label="documento"
-                options={documents}
-                value={document}
-                onChange={e => setDocument(e.target.value)}
-            />
+        <CInputGroup className="mb-4">
+            <CInputGroupText className="border-0">
+                <CIcon icon={cilFile} />
+            </CInputGroupText>
+                <CFormSelect 
+                    id="responseDocument"
+                    feedbackInvalid={errors.ResponseDocument}
+                    invalid={errors.isResponseDocumentInvalid}
+                    aria-label="documento"
+                    options={documents}
+                    value={document}
+                    onChange={e => setDocument(e.target.value)}
+                />
+        </CInputGroup>
         </div>
     );
 }

@@ -14,8 +14,27 @@ import {
   cilLockLocked,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
+import { useDispatch, useSelector } from 'react-redux'
+import { userReducer } from '../../states/userReducers'
 
 const AppHeaderDropdown = () => {
+
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.acount.user)
+
+  const logout = () => {
+
+    dispatch(userReducer({
+      connected: false,
+      user: {
+        username: user.username,
+        email: user.email,
+        password: user.password
+      }
+    }))
+
+  }
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -30,7 +49,7 @@ const AppHeaderDropdown = () => {
           Configuración
         </CDropdownItem>
          <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem onClick={logout}>
           <CIcon icon={cilLockLocked} className="me-2" />
           Cerrar sesión
         </CDropdownItem>

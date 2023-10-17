@@ -1,67 +1,89 @@
 import { useState } from "react";
-import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
-import { UserSignin } from "../models/User";
+import { CButton, CCol, CForm, CFormInput, CInputGroup, CInputGroupText, CRow, } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilLockLocked, cilUser } from '@coreui/icons'
+import { isEmptyObject } from "../connections/helpers/isEmptyObject";
 
 function SigninForm({errors, callback}) {
 
     const [username, setUsername] = useState("");
-    const [password, setPasword] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [validated, setValidated] = useState(false)
+
+    const validateForm = e => {
+
+        if (!isEmptyObject(errors)) {
+            e.preventDefault()
+            e.stopPropagation()
+
+            setValidated(false)
+        }
+
+    }
 
     const send = e => {
         e.preventDefault();
-        const user = new UserSignin(username, password);
+
+        const user = {
+            username: username,
+            password: password
+        }
+
         callback({user});
+
+        validateForm(e);
     }
 
     return (
-        <Form onSubmit={send}>
-            <Row className="justify-content-center">
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="username"
-                        label="nombre de usuario"
-                        className="mt-3 mb-4">
-                        <Form.Control 
-                            placeholder="nombre de usuario"
-                            type="text"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                            isInvalid={errors.username} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.username}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-            </Row>
-            <Row className="justify-content-center">
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="password"
-                        label="contraseña"
-                        className="mt-md-3 mb-4">
-                        <Form.Control 
-                            placeholder="contraseña"
-                            type="password"
-                            value={password}
-                            onChange={e => setPasword(e.target.value)}
-                            isInvalid={errors.password}
-                            min={8} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.password}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-            </Row>
-            <Row className="justify-content-center">
-                <Col md="6" xs="12">
-                    <Button 
-                            type="submit" 
-                            className="justify-content-center mt-3 my-color my-border-none p-3 w-100">
-                        Iniciar sesion
-                    </Button>
-                </Col>
-            </Row>
-        </Form>
+        <CForm
+            onSubmit={send}
+            noValidate
+            validated={validated}
+        >
+            <h1>Login</h1>
+            <p className="text-medium-emphasis">Iniciar sesión en su cuenta</p>
+            <CInputGroup className="mb-3">
+                <CInputGroupText className="border-0">
+                    <CIcon icon={cilUser} />
+                </CInputGroupText>
+                <CFormInput 
+                    id="username"
+                    placeholder="Username" 
+                    autoComplete="username" 
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    feedbackInvalid={errors.username}
+                    invalid={errors.isUsernameInvalid}
+                    />
+            </CInputGroup>
+            <CInputGroup className="mb-4">
+                <CInputGroupText className="border-0">
+                    <CIcon icon={cilLockLocked} />
+                </CInputGroupText>
+                <CFormInput
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    feedbackInvalid={errors.password}
+                    invalid={errors.isPasswordInvalid}
+                />
+            </CInputGroup>
+            <CRow>
+                <CCol xs={12} sm={6}>
+                    <CButton 
+                        type="submit" 
+                        color="danger" 
+                        className="text-white px-4"
+                    >
+                        Iniciar sesión
+                    </CButton>
+                </CCol>
+            </CRow>
+      </CForm>
     );
 }
 

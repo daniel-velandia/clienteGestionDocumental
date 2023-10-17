@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { readAddresseers } from "../../connections/FakeApi/addresseer";
-import { CFormLabel, CFormSelect } from "@coreui/react";
+import { CFormSelect, CInputGroup, CInputGroupText } from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import { cilAddressBook } from "@coreui/icons";
 
 const AddresseersSelect = ({errors, addresseer, setAddresseer}) => {
 
@@ -31,20 +33,20 @@ const AddresseersSelect = ({errors, addresseer, setAddresseer}) => {
     }, []);
 
     return (
-        <div>
-            <CFormLabel htmlFor="addresseer" className='mt-3'>
-                Destinatarios
-            </CFormLabel>
-            <CFormSelect 
-                id='addresseer'
-                feedbackInvalid={errors.addresseer}
-                invalid={errors.isAddresseerInvalid}
-                aria-label="destinatario"
-                options={addresseers}
-                value={addresseer}
-                onChange={e => setAddresseer(e.target.value)}
-            />
-        </div>
+        <CInputGroup className="mb-4">
+            <CInputGroupText className="border-0">
+                <CIcon icon={cilAddressBook} />
+            </CInputGroupText>
+                <CFormSelect 
+                    id="addresseer"
+                    feedbackInvalid={errors.addresseer}
+                    invalid={errors.isAddresseerInvalid}
+                    aria-label="destinatario"
+                    options={addresseers}
+                    value={addresseer}
+                    onChange={e => setAddresseer(e.target.value)}
+                />
+        </CInputGroup>
     );
 }
 

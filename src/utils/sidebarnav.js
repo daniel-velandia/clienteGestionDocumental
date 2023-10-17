@@ -3,8 +3,8 @@ import CIcon from '@coreui/icons-react'
 import {
   cilNotes,
   cilBook,
-  cilBriefcase,
-  cilAddressBook
+  cilAddressBook,
+  cilBuilding
 } from '@coreui/icons'
 import { CNavItem, CNavTitle } from '@coreui/react'
 
@@ -29,7 +29,7 @@ const sidebarnav = [
     component: CNavItem,
     name: 'Compañias',
     to: '/companies',
-    icon: <CIcon icon={cilBriefcase} customClassName="nav-icon" />
+    icon: <CIcon icon={cilBuilding} customClassName="nav-icon" />
   },
   {
     component: CNavItem,

@@ -1,142 +1,120 @@
 import { useState } from "react";
-import { Button, Col, Form, FloatingLabel, Row } from "react-bootstrap";
-import { UserSignup } from "../models/User";
+import { CButton, CForm, CFormInput, CInputGroup, CInputGroupText } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilAt, cilLockLocked, cilUser } from '@coreui/icons'
+import { isEmptyObject } from "../connections/helpers/isEmptyObject";
 
-function SignupForm({errors, callback}) {
-
-    const [identification, setIdentification] = useState("");
-    const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
+const SignupForm = ({errors, callback}) => {
+    
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [appPassword, setAppPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
+
+    const [validated, setValidated] = useState(false)
+
+    const validateForm = e => {
+
+        if (!isEmptyObject(errors)) {
+            e.preventDefault()
+            e.stopPropagation()
+
+            setValidated(false)
+        }
+
+    }
 
     const send = e => {
         e.preventDefault();
-        const user = new UserSignup(identification, name, lastName, email, username, password, appPassword);
+
+        const user = {
+            username: username,
+            email: email,
+            password: password,
+            repeatPassword: repeatPassword
+        }
+
         callback({user});
+
+        validateForm(e);
     }
 
     return (
-        <Form onSubmit={send}>
-            <Row>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="identification"
-                        label="documento de identidad"
-                        className="mt-3 mb-4">
-                        <Form.Control 
-                            placeholder="documento de identidad"
-                            type="number"
-                            value={identification}
-                            onChange={e => setIdentification(e.target.value)}
-                            isInvalid={errors.identification} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.identification}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="name"
-                        label="Nombre"
-                        className="mt-md-3 mb-4">
-                        <Form.Control 
-                            placeholder="Nombre"
-                            type="text"
-                            value={name}
-                            onChange={e => setName(e.target.value)}
-                            isInvalid={errors.name} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.name}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="lastName"
-                        label="Apellido"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="Apellido"
-                            type="text"
-                            value={lastName}
-                            onChange={e => setLastName(e.target.value)}
-                            isInvalid={errors.lastName} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.lastName}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="email"
-                        label="Correo"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="Correo"
-                            type="email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            isInvalid={errors.email} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.email}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="username"
-                        label="nombre de usuario"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="nombre de usuario"
-                            type="text"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                            isInvalid={errors.username} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.username}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="password"
-                        label="contraseña"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="contraseña"
-                            type="password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            isInvalid={errors.password} 
-                            min={8} />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.password}
-                        </Form.Control.Feedback>
-                    </FloatingLabel>
-                </Col>
-                <Col md="6" xs="12">
-                    <FloatingLabel
-                        controlId="appPassword"
-                        label="contraseña de aplicación"
-                        className="mb-4">
-                        <Form.Control 
-                            placeholder="contraseña de aplicación"
-                            type="password"
-                            value={appPassword}
-                            onChange={e => setAppPassword(e.target.value)} />
-                    </FloatingLabel>
-                </Col>
-                <Col sm="12">
-                    <Button type="submit" className="mt-3 my-color my-border-none p-3 w-100">
-                        Registrarse
-                    </Button>
-                </Col>
-            </Row>
-        </Form>
+        <CForm
+            onSubmit={send}
+            noValidate
+            validated={validated}
+        >
+            <h1>Registro</h1>
+            <p className="text-medium-emphasis">Crea una cuenta</p>
+            <CInputGroup className="mb-3">
+                <CInputGroupText className="border-0">
+                    <CIcon icon={cilUser} />
+                </CInputGroupText>
+                <CFormInput 
+                    id="username"
+                    placeholder="Username" 
+                    autoComplete="username"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    feedbackInvalid={errors.username}
+                    invalid={errors.isUsernameInvalid}
+                />
+            </CInputGroup>
+            <CInputGroup className="mb-3">
+                <CInputGroupText className="border-0">
+                    <CIcon icon={cilAt} />
+                </CInputGroupText>
+                <CFormInput 
+                    id="email"
+                    placeholder="Email" 
+                    autoComplete="email" 
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    feedbackInvalid={errors.email}
+                    invalid={errors.isEmailInvalid}
+                />
+            </CInputGroup>
+            <CInputGroup className="mb-3">
+                <CInputGroupText className="border-0">
+                    <CIcon icon={cilLockLocked} />
+                </CInputGroupText>
+                <CFormInput
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    feedbackInvalid={errors.password}
+                    invalid={errors.isPasswordInvalid}
+                />
+            </CInputGroup>
+            <CInputGroup className="mb-4">
+                <CInputGroupText className="border-0">
+                    <CIcon icon={cilLockLocked} />
+                </CInputGroupText>
+                <CFormInput
+                    id="repeatPassword"
+                    type="password"
+                    placeholder="Repeat password"
+                    autoComplete="new-password"
+                    value={repeatPassword}
+                    onChange={e => setRepeatPassword(e.target.value)}
+                    feedbackInvalid={errors.repeatPassword}
+                    invalid={errors.isRepeatPasswordInvalid}
+                />
+            </CInputGroup>
+            <div className="d-grid">
+                <CButton 
+                    type="submit" 
+                    color="danger" 
+                    className='text-white'
+                >
+                    Crear cuenta
+                </CButton>
+            </div>
+        </CForm>
     );
 }
 

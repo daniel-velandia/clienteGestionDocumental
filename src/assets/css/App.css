@@ -27,6 +27,11 @@
     margin-top: -4px;
 }
 
+.my-link {
+    padding: 0px 0px 0px 5px !important;
+    margin-top: -4px;
+}
+
 .form-control, .form-select {
     background-color: #eeeeee !important;
     border: none !important;

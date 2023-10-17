@@ -4,8 +4,10 @@ import { CompaniesSelect } from "../companies/CompaniesSelect";
 import { AddresseersSelect } from "../addresseers/AddresseersSelect";
 import { DocumentsSelect } from "./DocumentsSelect";
 import { FileButton } from "./FileButton";
-import { CButton, CCol, CForm, CRow, CFormCheck, CFormInput, CFormLabel } from "@coreui/react";
+import { CButton, CCol, CForm, CRow, CFormCheck, CFormInput, CInputGroup, CInputGroupText } from "@coreui/react";
 import { isEmptyObject } from "../../connections/helpers/isEmptyObject";
+import CIcon from "@coreui/icons-react";
+import { cilBarcode, cilFile, cilInbox, cilPaperclip } from "@coreui/icons";
 
 const CreateDocumentForm = ({
                     errors, 
@@ -98,64 +100,72 @@ const CreateDocumentForm = ({
         >
             <CRow>
                 <CCol md="6" xs="12">
-                    <CFormLabel htmlFor="registrationNumber" className='mt-3'>
-                        Numero de radicado
-                    </CFormLabel>
-                    <CFormInput
-                        type="number"
-                        id="registrationNumber"
-                        placeholder="Numero de radicado"
-                        aria-describedby="Numero de radicado"
-                        feedbackInvalid={errors.registrationNumber}
-                        invalid={errors.isRegistrationNumberInvalid}
-                        value={registrationNumber}
-                        onChange={e => setRegistrationNumber(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilBarcode} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="registrationNumber"
+                            type="number"
+                            placeholder="Numero de radicado"
+                            aria-describedby="Numero de radicado"
+                            feedbackInvalid={errors.registrationNumber}
+                            invalid={errors.isRegistrationNumberInvalid}
+                            value={registrationNumber}
+                            onChange={e => setRegistrationNumber(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md="6" xs="12">
-                    <CFormLabel htmlFor="typeDocument" className='mt-3'>
-                        Tipo de documento
-                    </CFormLabel>
-                    <CFormInput
-                        type="text"
-                        id="typeDocument"
-                        placeholder="Tipo de documento"
-                        aria-describedby="Tipo de documento"
-                        feedbackInvalid={errors.typeDocument}
-                        invalid={errors.isTypeDocumentInvalid}
-                        value={typeDocument}
-                        onChange={e => setTypeDocument(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilFile} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="typeDocument"
+                            type="text"
+                            placeholder="Tipo de documento"
+                            aria-describedby="Tipo de documento"
+                            feedbackInvalid={errors.typeDocument}
+                            invalid={errors.isTypeDocumentInvalid}
+                            value={typeDocument}
+                            onChange={e => setTypeDocument(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md="6" xs="12">
-                    <CFormLabel htmlFor="subject" className='mt-3'>
-                        Asunto
-                    </CFormLabel>
-                    <CFormInput
-                        type="text"
-                        id="subject"
-                        placeholder="asunto"
-                        aria-describedby="asunto"
-                        feedbackInvalid={errors.subject}
-                        invalid={errors.isSubjectInvalid}
-                        value={subject}
-                        onChange={e => setSubject(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilInbox} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="subject"
+                            type="text"
+                            placeholder="asunto"
+                            aria-describedby="asunto"
+                            feedbackInvalid={errors.subject}
+                            invalid={errors.isSubjectInvalid}
+                            value={subject}
+                            onChange={e => setSubject(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md="6" xs="12">
-                    <CFormLabel htmlFor="annexes" className='mt-3'>
-                        Anexos
-                    </CFormLabel>
-                    <CFormInput
-                        type="text"
-                        id="annexes"
-                        placeholder="Anexos"
-                        aria-describedby="Anexos"
-                        feedbackInvalid={errors.annexes}
-                        invalid={errors.isAnnexesInvalid}
-                        value={annexes}
-                        onChange={e => setAnnexes(e.target.value)}
-                    />
+                    <CInputGroup className="mb-4">
+                        <CInputGroupText className="border-0">
+                            <CIcon icon={cilPaperclip} />
+                        </CInputGroupText>
+                        <CFormInput
+                            id="annexes"
+                            type="text"
+                            placeholder="Anexos"
+                            aria-describedby="Anexos"
+                            feedbackInvalid={errors.annexes}
+                            invalid={errors.isAnnexesInvalid}
+                            value={annexes}
+                            onChange={e => setAnnexes(e.target.value)}
+                        />
+                    </CInputGroup>
                 </CCol>
                 <CCol md="6" xs="12">
                     <StudentsSelect
@@ -192,8 +202,8 @@ const CreateDocumentForm = ({
                 </CCol>
                 <CCol xs="12" className="d-inline-grid mb-4">
                     <CFormCheck 
+                        id="requiresResponse"
                         button={{ color: 'secondary', variant: 'outline'}} 
-                        id="requiresResponse" 
                         autoComplete="off" 
                         label="El documento requiere de una respuesta" 
                         checked={requiresResponse}
@@ -202,8 +212,8 @@ const CreateDocumentForm = ({
                 </CCol>
                 <CCol md="6" xs="12"  className="d-inline-grid mb-4">
                     <CFormCheck 
+                        id="typeRegistration"
                         button={{ color: 'secondary', variant: 'outline' }} 
-                        id="typeRegistration" 
                         autoComplete="off" 
                         label={typeRegistration ? 'Radicado de entrega' : 'Radicado de respuesta'} 
                         checked={typeRegistration}

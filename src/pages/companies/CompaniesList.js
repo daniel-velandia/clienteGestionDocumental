@@ -21,12 +21,12 @@ const CompaniesList = () => {
         <div className="mb-3">
             <CRow>
                 <CCol xs="12" className="d-flex">
-                    <h2 className="my-3">Compañias</h2>
+                    <h1 className="my-3">Compañias</h1>
                     <CButton 
                         component={NavLink}
                         to={`/companies/create`}
                         color="link"
-                        className="mt-2 p-3"
+                        className="h-100 d-flex align-items-center mt-1"
                     >
                         <CIcon icon={cilPlus} height={24} className="text-danger"/>
                     </CButton>
