@@ -6,7 +6,7 @@ import { CButton, CCard, CCardBody, CCardHeader, CCol, CListGroup, CListGroupIte
 import CIcon from "@coreui/icons-react";
 import { cilPencil } from "@coreui/icons";
 import moment from "moment";
-import bytes from "../../utils/bytes";
+import convertBytes from "../../utils/convertBytes";
 
 const DetailDocument = () => {
 
@@ -47,7 +47,7 @@ const DetailDocument = () => {
                         <strong>RAD:</strong> {document.registrationNumber}
                     </CListGroupItem>
                     <CListGroupItem>
-                        <strong>Peso:</strong> {bytes(document.size)}
+                        <strong>Peso:</strong> {convertBytes(document.size)}
                     </CListGroupItem>
                     <CListGroupItem>
                         <strong>Fecha:</strong> {moment(document.dateCreated).format('D[/]MM[/]YYYY')}

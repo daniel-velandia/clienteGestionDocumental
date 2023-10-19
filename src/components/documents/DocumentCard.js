@@ -1,7 +1,7 @@
 import { CBadge, CButton, CCard, CCardBody, CCardSubtitle, CCardText, CCardTitle, CCol } from "@coreui/react";
 import { NavLink } from "react-router-dom";
 import { VisualizeFileButton } from "./VisualizeFileButton";
-import bytes from "../../utils/bytes";
+import convertBytes from "../../utils/convertBytes";
 import moment from "moment/moment";
 
 const DocumentCard = ({document}) => {
@@ -21,7 +21,7 @@ const DocumentCard = ({document}) => {
                     </CButton>
                 </CCardTitle>
                 <CCardSubtitle>
-                    {`${bytes(document.size)} - ${moment(document.dateCreated).format('D[/]MM[/]YYYY')}`}
+                    {`${convertBytes(document.size)} - ${moment(document.dateCreated).format('D[/]MM[/]YYYY')}`}
                 </CCardSubtitle>
                 <CCardText>
                 <div className="d-flex justify-content-between align-items-center mt-2">

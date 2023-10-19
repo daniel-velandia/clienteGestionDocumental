@@ -73,11 +73,11 @@ function SigninForm({errors, callback}) {
                 />
             </CInputGroup>
             <CRow>
-                <CCol xs={12} sm={6}>
+                <CCol xs={12}>
                     <CButton 
                         type="submit" 
                         color="danger" 
-                        className="text-white px-4"
+                        className="text-white w-100 px-4"
                     >
                         Iniciar sesión
                     </CButton>
