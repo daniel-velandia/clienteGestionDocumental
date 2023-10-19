@@ -22,7 +22,7 @@ const DefaultLayout = () => {
       }
     });
 
-  }, [navigation, connected])
+  }, [navigation, connected, dispatch])
 
   return (
     <div>

@@ -1,5 +1,5 @@
 
-export default (sizeBytes) => {
+const convertBytes = (sizeBytes) => {
 
     const units = ['bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
 
@@ -11,3 +11,5 @@ export default (sizeBytes) => {
     
     return(convertSize.toFixed(convertSize < 10 && index > 0 ? 1 : 0) + ' ' + units[index]);
 }
+
+export default convertBytes;

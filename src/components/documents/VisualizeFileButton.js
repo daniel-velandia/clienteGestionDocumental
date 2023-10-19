@@ -22,6 +22,7 @@ const VisualizeFileButton = ({documentId}) => {
             <a 
                 href={pdfUrl} 
                 target="_blank"
+                rel="noopener noreferrer"
             >
                 <CIcon icon={cilLowVision} size="xl" className="text-danger" />
             </a>
