@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { readCompanies } from "../../connections/FakeApi/company";
 import { readStudents } from "../../connections/FakeApi/student";
 import { CFormSelect, CInputGroup, CInputGroupText } from "@coreui/react";
@@ -32,7 +32,7 @@ const SenderSelect = ({errors, senderType, senderSelected, setSenderSelected}) =
         ));
     }
 
-    const fetchSelectArray = async () => {
+    const fetchSelectArray = useCallback(async () => {
 
         const initialSelectArray = [
             { label: 'Seleccione un remitente', value: '' }
@@ -53,7 +53,7 @@ const SenderSelect = ({errors, senderType, senderSelected, setSenderSelected}) =
         }
 
         return initialSelectArray.concat(sendersArray);
-    }
+    }, [senderType])
 
     useEffect(() => {
         const fetchSenders = async () => {
@@ -62,7 +62,7 @@ const SenderSelect = ({errors, senderType, senderSelected, setSenderSelected}) =
         }
 
         fetchSenders();
-    }, [senderType]);
+    }, [fetchSelectArray]);
 
     const handleSender = (e) => {
         setSender(e.target.value);
@@ -72,7 +72,7 @@ const SenderSelect = ({errors, senderType, senderSelected, setSenderSelected}) =
     return (
         <CInputGroup className="mb-4">
             <CInputGroupText className="border-0">
-                <CIcon icon={senderType == "company" ? cilBuilding : cilUser} />
+                <CIcon icon={senderType === "company" ? cilBuilding : cilUser} />
             </CInputGroupText>
                 <CFormSelect 
                     id="senders"

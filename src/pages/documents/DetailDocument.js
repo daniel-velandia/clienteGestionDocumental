@@ -73,7 +73,7 @@ const DetailDocument = () => {
                         <strong>Remitente:</strong> 
                             <CButton
                                 component={NavLink}
-                                to={`/${document.senderType == "student" ? "students" : "companies" }/detail?q=${document.sender}`}
+                                to={`/${document.senderType === "student" ? "students" : "companies" }/detail?q=${document.sender}`}
                                 className="text-decoration-none text-danger my-link"
                                 color="link"
                             >
