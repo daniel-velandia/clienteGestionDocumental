@@ -26,13 +26,13 @@ const DeleteAddresseerButton = ({addresseer}) => {
           onClose={() => setVisible(false)}
           aria-labelledby="LiveDemoExampleLabel"
       >
-        <CModalHeader onClose={() => setVisible(false)}>
+        <CModalHeader className='border-0' onClose={() => setVisible(false)}>
           <CModalTitle id="LiveDemoExampleLabel">Eliminar destinatario</CModalTitle>
         </CModalHeader>
         <CModalBody>
           Estás seguro que quieres eliminar el destinatario {addresseer.name} {addresseer.lastName}?
         </CModalBody>
-        <CModalFooter>
+        <CModalFooter className='border-0'>
             <CButton 
               color="secondary"
               className='text-white' 

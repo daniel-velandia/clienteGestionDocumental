@@ -13,11 +13,16 @@ const EditStudent = () => {
     const location = useLocation();
     const navigation = useNavigate();
 
-    const query = new URLSearchParams(location.search).get("q");
+    const id = new URLSearchParams(location.search).get("q");
 
     useEffect(() => {
-        setCurrentStudent(findStudentById(parseInt(query)));
-    }, [query, location])
+        const findStudent = async () => {
+            const studentObtained = await findStudentById(id);
+            setCurrentStudent(studentObtained);
+        }
+
+        findStudent();
+    }, [id, location])
 
     const edit = async ({student, cleanValues}) => {
 
@@ -71,7 +76,7 @@ const EditStudent = () => {
             <CCol sm={12} md={10} lg={8} xl={7}>
                 {
                     currentStudent &&
-                        <CCard>
+                        <CCard className="border-0 shadow-sm">
                         <CCardBody>
                             <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                                 Editar estudiante
@@ -86,6 +91,7 @@ const EditStudent = () => {
                                 currentPhone={currentStudent.phone}
                                 currentCareer={currentStudent.career}
                                 currentSemester={currentStudent.semester}
+                                editable={true}
                             />
                         </CCardBody>
                     </CCard>

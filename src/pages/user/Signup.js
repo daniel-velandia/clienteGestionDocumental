@@ -2,11 +2,11 @@ import React from 'react'
 import { CCard, CCardBody, CCol, CContainer, CRow } from '@coreui/react'
 import { useState } from 'react'
 import validator from 'validator'
-import { isEmptyObject } from '../connections/helpers/isEmptyObject'
+import { isEmptyObject } from '../../connections/helpers/isEmptyObject'
 import { useNavigate } from 'react-router-dom'
-import { SignupForm } from '../components/SignupForm'
+import { SignupForm } from '../../components/user/SignupForm'
 import { useDispatch } from 'react-redux'
-import { userReducer } from '../states/userReducers'
+import { userReducer } from '../../states/userReducers'
 
 const Signup = () => {
     
@@ -66,7 +66,7 @@ const Signup = () => {
             <CContainer>
                 <CRow className="justify-content-center">
                     <CCol md={9} lg={7} xl={6}>
-                    <CCard className="mx-4">
+                    <CCard className="mx-4 border-0 shadow-sm">
                         <CCardBody className="p-4">
                             <SignupForm
                                 errors={errors}

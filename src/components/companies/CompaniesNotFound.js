@@ -5,7 +5,7 @@ const CompaniesNotFound = () => {
 
     return (
         <div className="d-flex justify-content-center w-100 my-h-img">
-            <CCol xs="12" sm="4" className="text-center align-self-center">
+            <CCol xs={12} sm={4} className="text-center align-self-center">
                 <CImage src={companiessNotFound} height={200} alt="no hay comañias" />
                 <p className="lead">Parece que no hay compañias que mostrar</p>
             </CCol>

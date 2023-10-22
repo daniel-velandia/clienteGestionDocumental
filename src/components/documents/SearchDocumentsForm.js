@@ -79,7 +79,7 @@ const SearchDocumentsForm = () => {
                 onClose={() => setVisible(false)}
                 aria-labelledby="LiveDemoExampleLabel"
             >
-                <CModalHeader onClose={() => setVisible(false)}>
+                <CModalHeader className='border-0' onClose={() => setVisible(false)}>
                     <CModalTitle id="LiveDemoExampleLabel">Buscar documentos</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
@@ -131,7 +131,7 @@ const SearchDocumentsForm = () => {
                         />
                     </CForm>
                 </CModalBody>
-                <CModalFooter>
+                <CModalFooter className='border-0'>
                     <CButton 
                         color="danger"
                         className='text-white' 

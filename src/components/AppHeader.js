@@ -26,7 +26,7 @@ const AppHeader = () => {
   const sidebarShow = useSelector(state => state.slice.sidebarShow)
 
   return (
-    <CHeader position="sticky" className="mb-4">
+    <CHeader position="sticky" className="mb-4 border-0 shadow-sm">
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1 d-md-none"
@@ -34,12 +34,12 @@ const AppHeader = () => {
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
-        <CHeaderBrand className="mx-auto mx-md-0" to="/">
+        <CHeaderBrand className="mx-auto mx-md-0">
           <CImage src={logo} height={40} alt="logo" />
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex ms-1 me-auto">
           <CNavItem>
-            <CNavLink component={NavLink} to="/">
+            <CNavLink component={NavLink} to="/documents">
               Documentos
             </CNavLink>
           </CNavItem>
@@ -69,7 +69,6 @@ const AppHeader = () => {
         <AppHeaderDropdown />
         </CHeaderNav>
       </CContainer>
-      <CHeaderDivider />
       <CContainer fluid>
         <AppBreadcrumb />
       </CContainer>

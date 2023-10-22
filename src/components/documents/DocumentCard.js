@@ -7,15 +7,15 @@ import moment from "moment/moment";
 const DocumentCard = ({document}) => {
 
     return (
-        <CCol md={6} lg={3}>
-            <CCard className="my-2">
+        <CCol xs={12} sm={6} lg={3}>
+            <CCard className="my-2 border-0 shadow-sm">
             <CCardBody>
                 <CCardTitle className="text-truncate">
                     <CButton 
                         color="link"
                         component={NavLink}
                         to={`/documents/detail?q=${document.documentId}`}
-                        className="my-card-title my-color-text-title"
+                        className="my-card-title text-danger"
                     >
                         {document.name}
                     </CButton>
@@ -23,14 +23,14 @@ const DocumentCard = ({document}) => {
                 <CCardSubtitle>
                     {`${convertBytes(document.size)} - ${moment(document.dateCreated).format('D[/]MM[/]YYYY')}`}
                 </CCardSubtitle>
-                <CCardText>
-                <div className="d-flex justify-content-between align-items-center mt-2">
-                    <VisualizeFileButton documentId={document.documentId}/>
-                    <CCardText>
-                        <CBadge color="danger"className="mx-1">RAD {document.registrationNumber}</CBadge>
-                    </CCardText>
+                <div>
+                    <div className="d-flex justify-content-between align-items-center mt-3">
+                        <VisualizeFileButton documentId={document.documentId}/>
+                        <CCardText>
+                            <CBadge color="secondary">RAD {document.registrationNumber}</CBadge>
+                        </CCardText>
+                    </div>
                 </div>
-                </CCardText>
             </CCardBody>
             </CCard>
         </CCol>

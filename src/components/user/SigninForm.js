@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CButton, CCol, CForm, CFormInput, CInputGroup, CInputGroupText, CRow, } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import { isEmptyObject } from "../connections/helpers/isEmptyObject";
+import { isEmptyObject } from "../../connections/helpers/isEmptyObject";
 
 function SigninForm({errors, callback}) {
 
@@ -44,7 +44,7 @@ function SigninForm({errors, callback}) {
             <h1>Login</h1>
             <p className="text-medium-emphasis">Iniciar sesión en su cuenta</p>
             <CInputGroup className="mb-3">
-                <CInputGroupText className="border-0">
+                <CInputGroupText className="border-0 shadow-sm">
                     <CIcon icon={cilUser} />
                 </CInputGroupText>
                 <CFormInput 
@@ -58,7 +58,7 @@ function SigninForm({errors, callback}) {
                     />
             </CInputGroup>
             <CInputGroup className="mb-4">
-                <CInputGroupText className="border-0">
+                <CInputGroupText className="border-0 shadow-sm">
                     <CIcon icon={cilLockLocked} />
                 </CInputGroupText>
                 <CFormInput

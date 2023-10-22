@@ -1,22 +1,21 @@
 var addresseers = [];
 
-function createAddresseer(addresseer) {
+async function createAddresseer(addresseer) {
   const addresseerId = Math.floor(Math.random() * 1000000) + 1;
-  addresseer.addresseerId = addresseerId;
-  
+  addresseer.addresseerId = addresseerId.toString();
   addresseers.push(addresseer);
 }
 
-function readAddresseers() {
+async function readAddresseers() {
   return addresseers;
 }
 
-function findAddresseerById(addresseerId) {
+async function findAddresseerById(addresseerId) {
   return addresseers.find(addresseer => addresseer.addresseerId === addresseerId);
 }
 
-function updateAddresseerById(addresseerId, addresseer) {
-  const currentAddresseer = findAddresseerById(addresseerId);
+async function updateAddresseerById(addresseerId, addresseer) {
+  const currentAddresseer = await findAddresseerById(addresseerId);
   if (currentAddresseer) {
     Object.assign(currentAddresseer, addresseer);
   }

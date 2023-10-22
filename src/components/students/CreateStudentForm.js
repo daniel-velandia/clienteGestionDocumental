@@ -13,7 +13,8 @@ const CreateStudentForm = ({
                     currentEmail = "",
                     currentPhone = "",
                     currentCareer = "",
-                    currentSemester = ""}) => {
+                    currentSemester = "",
+                    editable = false}) => {
 
     const [identification, setIdentification] = useState(currentIdentification);
     const [name, setName] = useState(currentName);
@@ -36,16 +37,6 @@ const CreateStudentForm = ({
 
     }
 
-    const cleanValues = () => {
-        setIdentification("");
-        setName("");
-        setLastName("");
-        setEmail("");
-        setPhone("");
-        setCareer("");
-        setSemester("");
-    }
-
     const send = e => {
         e.preventDefault();
 
@@ -59,7 +50,7 @@ const CreateStudentForm = ({
             semester: semester
         };
         
-        callback({student, cleanValues});
+        callback({student});
 
         validateForm(e);
     }
@@ -83,7 +74,6 @@ const CreateStudentForm = ({
                             aria-describedby="identificación"
                             feedbackInvalid={errors.identification}
                             invalid={errors.isIdentificationInvalid}
-                            defaultValue={currentIdentification}
                             value={identification}
                             onChange={e => setIdentification(e.target.value)}
                         />
@@ -213,7 +203,7 @@ const CreateStudentForm = ({
                 </CCol>
                 <CCol sm={12}>
                     <CButton type="submit" color="danger" className="mt-3 text-white w-100">
-                        Crear estudiante
+                        {editable ? "Editar" : "Crear"} estudiante
                     </CButton>
                 </CCol>
             </CRow>

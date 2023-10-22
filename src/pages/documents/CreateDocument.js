@@ -3,14 +3,15 @@ import { useState } from "react";
 import { CreateDocumentForm } from "../../components/documents/CreateDocumentForm";
 import { isEmptyObject } from "../../connections/helpers/isEmptyObject";
 import { createDocument } from "../../connections/FakeApi/document";
-import { toast } from "react-toastify";
 import { CCard, CCardBody, CCardTitle, CCol, CRow } from "@coreui/react";
+import { useNavigate } from "react-router-dom";
 
 function CreateDocument() {
 
     const [errors, setErrors] = useState({});
+    const navigation = useNavigate();
 
-    async function create({document, cleanValues}) {
+    async function create({document}) {
 
         const error = {};
 
@@ -44,9 +45,13 @@ function CreateDocument() {
             error.isAddresseerInvalid = true;
         }
 
-        if((validator.isEmpty(document.studentSender) && validator.isEmpty(document.companySender)) ||
-                (!validator.isEmpty(document.studentSender) && !validator.isEmpty(document.companySender))) {
-            error.sender = 'Debe seleccionar un remitente (estudiante o empresa)';
+        if(validator.isEmpty(document.senderType)) {
+            error.senderType = 'Debe seleccionar un tipo de remitente';
+            error.isSenderTypeInvalid = true;
+        }
+
+        if(validator.isEmpty(document.sender)) {
+            error.sender = 'Debe seleccionar un remitente';
             error.isSenderInvalid = true;
         }
 
@@ -63,20 +68,14 @@ function CreateDocument() {
             setErrors(error);
         } else {
             createDocument(document);
-
-            toast.info(`Documento ${document.name} creado con exito`, {
-                position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000
-            });
-
-            setErrors({});
-            cleanValues();
+            navigation("/documents");
         }
     };
 
     return (
         <CRow  className="justify-content-center mb-3">
             <CCol sm={12} md={10} lg={8} xl={7}>
-                <CCard>
+                <CCard className="border-0 shadow-sm">
                     <CCardBody>
                         <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                             Crear documento

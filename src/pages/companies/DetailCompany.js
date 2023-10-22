@@ -18,17 +18,22 @@ import { cilPencil } from "@coreui/icons";
 const DetailCompany = () => {
   const [company, setCompany] = useState(null);
   const location = useLocation();
-  const query = new URLSearchParams(location.search).get("q");
+  const id = new URLSearchParams(location.search).get("q");
 
   useEffect(() => {
-    setCompany(findCompanyById(parseInt(query)));
-  }, [query, location]);
+    const findCompany = async () => {
+      const companyObtained = await findCompanyById(id);
+      setCompany(companyObtained);
+    }
+
+    findCompany();
+  }, [id, location]);
 
   return (
     <CRow className="justify-content-center mb-4">
       <CCol xs={12} sm={4}>
         {company && 
-          <CCard>
+          <CCard className="border-0 shadow-sm">
             <CCardHeader className="bg-danger text-white">
               <CRow className="align-items-center">
                 <CCol xs={12} lg={7}>

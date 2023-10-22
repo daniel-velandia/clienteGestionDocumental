@@ -8,7 +8,8 @@ const AddresseersSelect = ({errors, addresseer, setAddresseer}) => {
 
     const [addresseers, setAddresseers] = useState([]);
 
-    const getAddresseers = (addresseersObtained) => {
+    const fetchSelectArray = async () => {
+        const addresseersObtained = await readAddresseers();
 
         const initialSelectArray = [
             { label: 'Seleccione un destinatario', value: '' }
@@ -25,11 +26,12 @@ const AddresseersSelect = ({errors, addresseer, setAddresseer}) => {
     }
 
     useEffect(() => {
-
-        const addresseersObtained = readAddresseers();
-
-        setAddresseers(getAddresseers(addresseersObtained));
-
+        const fetchAddresseers = async () => {
+            const addresseersObtained = await fetchSelectArray();
+            setAddresseers(addresseersObtained);
+        }
+        
+        fetchAddresseers();
     }, []);
 
     return (

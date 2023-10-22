@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { CButton, CCol, CRow } from "@coreui/react"
+import { CButton, CCol, CRow, CTooltip } from "@coreui/react"
 import { readStudents } from "../../connections/FakeApi/student";
 import CIcon from "@coreui/icons-react";
 import { cilPlus } from "@coreui/icons";
@@ -14,22 +14,33 @@ const StudentsList = () => {
     const [students, setStudents] = useState([]);
 
     useEffect(() => {
-        setStudents(readStudents());
+        const fetchStudents = async () => {
+            const studentsObtained = await readStudents();
+            setStudents(studentsObtained);
+        }
+
+        fetchStudents();
     }, [location])
 
     return (
         <div className="mb-3">
             <CRow>
-                <CCol xs="12" className="d-flex">
+                <CCol xs={12} className="d-flex justify-content-between">
                     <h1 className="my-3">Estudiantes</h1>
-                    <CButton 
-                        component={NavLink}
-                        to={`/students/create`}
-                        color="link"
-                        className="h-100 d-flex align-items-center mt-1"
+                    <CTooltip
+                        content="Crear estudiante"
+                        placement="top"
                     >
-                        <CIcon icon={cilPlus} height={24} className="text-danger"/>
-                    </CButton>
+                        <CButton 
+                            component={NavLink}
+                            to={"/students/create"}
+                            color="danger"
+                            shape="rounded-pill"
+                            className="my-btn-add"
+                        >
+                            <CIcon icon={cilPlus} height={24} className="text-white"/>
+                        </CButton>
+                    </CTooltip>
                 </CCol>
             </CRow>
             <CRow>

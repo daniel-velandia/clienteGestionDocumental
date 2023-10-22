@@ -21,27 +21,26 @@ const DetailCompany = lazy(()=> import('../pages/companies/DetailCompany'))
 const EditCompany = lazy(()=> import('../pages/companies/EditCompany'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home'},
 
-  { path: '/documents', name: 'DocumentsList', element: DocumentsList },
-  { path: '/documents/create', name: 'CreateDocument', element: CreateDocument },
-  { path: '/documents/detail', name: 'DetailDocument', element: DetailDocument },
-  { path: '/documents/edit', name: 'EditDocument', element: EditDocument },
+  { path: '/documents', name: 'Documentos', element: DocumentsList },
+  { path: '/documents/create', name: 'Crear', element: CreateDocument },
+  { path: '/documents/detail', name: 'Detalle', element: DetailDocument },
+  { path: '/documents/edit', name: 'Editar', element: EditDocument },
 
-  { path: '/students', name: 'StudentsList', element: StudentsList },
-  { path: '/students/create', name: 'CreateStudent', element: CreateStudent },
-  { path: '/students/detail', name: 'DetailStudent', element: DetailStudent },
-  { path: '/students/edit', name: 'EditStudent', element: EditStudent },
+  { path: '/students', name: 'Estudiantes', element: StudentsList },
+  { path: '/students/create', name: 'Crear', element: CreateStudent },
+  { path: '/students/detail', name: 'Detalle', element: DetailStudent },
+  { path: '/students/edit', name: 'Editar', element: EditStudent },
 
-  { path: '/addresseers', name: 'AddresseersList', element: AddresseersList },
-  { path: '/addresseers/create', name: 'CreateAddresseer', element: CreateAddresseer },
-  { path: '/addresseers/detail', name: 'DetailAddresseer', element: DetailAddresseer },
-  { path: '/addresseers/edit', name: 'EditAddreesser', element: EditAddreesser },
+  { path: '/addresseers', name: 'Destinatarios', element: AddresseersList },
+  { path: '/addresseers/create', name: 'Crear', element: CreateAddresseer },
+  { path: '/addresseers/detail', name: 'Detalle', element: DetailAddresseer },
+  { path: '/addresseers/edit', name: 'Editar', element: EditAddreesser },
 
-  { path: '/companies', name: 'CompaniessList', element: CompaniessList },
-  { path: '/companies/create', name: 'CreateCompany', element: CreateCompany },
-  { path: '/companies/detail', name: 'DetailCompany', element: DetailCompany },
-  { path: '/companies/edit', name: 'EditCompany', element: EditCompany },
+  { path: '/companies', name: 'Compañias', element: CompaniessList },
+  { path: '/companies/create', name: 'Crear', element: CreateCompany },
+  { path: '/companies/detail', name: 'Detalle', element: DetailCompany },
+  { path: '/companies/edit', name: 'Editar', element: EditCompany },
 ]
 
 export default routes

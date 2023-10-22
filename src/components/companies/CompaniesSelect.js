@@ -8,7 +8,8 @@ const CompaniesSelect = ({errors, company, setCompany}) => {
 
     const [companies, setCompanies] = useState([]);
 
-    const getCompanies = (companiesObtained) => {
+    const fetchSelectArray = async () => {
+        const companiesObtained = await readCompanies();
 
         const initialSelectArray = [
             { label: 'Seleccione una compañia', value: '' }
@@ -25,11 +26,12 @@ const CompaniesSelect = ({errors, company, setCompany}) => {
     }
 
     useEffect(() => {
+        const fetchCompanies = async () => {
+            const companiesObtained = await fetchCompanies();
+            setCompanies(companiesObtained);
+        }
 
-        const companiesObtained = readCompanies();
-
-        setCompanies(getCompanies(companiesObtained));
-
+        fetchCompanies();
     }, []);
 
     return (

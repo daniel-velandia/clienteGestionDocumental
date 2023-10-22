@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CButton, CCard, CCardBody, CCardGroup, CCol, CContainer, CRow, } from '@coreui/react'
-import { SigninForm } from '../components/SigninForm'
+import { SigninForm } from '../../components/user/SigninForm'
 import { useState } from 'react'
 import validator from 'validator'
-import { isEmptyObject } from '../connections/helpers/isEmptyObject'
+import { isEmptyObject } from '../../connections/helpers/isEmptyObject'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { userReducer } from '../states/userReducers'
+import { userReducer } from '../../states/userReducers'
 
 const Signin = () => {
 
@@ -71,7 +71,7 @@ const Signin = () => {
         <CRow className="justify-content-center">
           <CCol md={8}>
             <CCardGroup>
-              <CCard className="p-4">
+              <CCard className="p-4 border-0 shadow-sm">
                 <CCardBody>
                   <SigninForm
                     errors={errors}
@@ -79,7 +79,7 @@ const Signin = () => {
                   />
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-danger py-5">
+              <CCard className="text-white bg-danger py-5 border-0 shadow-sm">
                 <CCardBody className="text-center">
                   <div>
                     <h2>Registrate</h2>

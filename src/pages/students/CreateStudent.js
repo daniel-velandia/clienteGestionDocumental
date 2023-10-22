@@ -4,13 +4,14 @@ import { CCard, CCardBody, CCardTitle, CCol, CRow } from "@coreui/react";
 import { CreateStudentForm } from "../../components/students/CreateStudentForm";
 import { createStudent } from "../../connections/FakeApi/student";
 import { isEmptyObject } from "../../connections/helpers/isEmptyObject";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function CreateStudent() {
 
     const [errors, setErrors] = useState({});
+    const navigation = useNavigate();
 
-    const create = async ({student, cleanValues}) => {
+    const create = async ({student}) => {
 
         const error = {};
 
@@ -53,20 +54,14 @@ function CreateStudent() {
             setErrors(error);
         } else {
             createStudent(student);
-
-            toast.info(`Estudiante ${student.name} ${student.lastName} creado con exito`, {
-                position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000
-            });
-
-            setErrors({});
-            cleanValues();
+            navigation("/students");
         }
     };
 
     return (
         <CRow className="justify-content-center mb-3">
             <CCol sm={12} md={10} lg={8} xl={7}>
-                <CCard>
+                <CCard className="border-0 shadow-sm">
                     <CCardBody>
                         <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                             Crear estudiante

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { sidebarShowReducer } from '../states/sliceReducers'
 
 const DefaultLayout = () => {
 
   const connected = useSelector(state => state.acount.connected)
   const navigation = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if(!connected) {
@@ -27,7 +27,7 @@ const DefaultLayout = () => {
   return (
     <div>
       <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100 bg-light">
+      <div className="wrapper d-flex flex-column min-vh-100 my-bg-light">
         <AppHeader />
         <div className="body flex-grow-1 px-3">
           <AppContent />

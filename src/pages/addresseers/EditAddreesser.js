@@ -13,13 +13,18 @@ const EditAddresseer = () => {
     const location = useLocation();
     const navigation = useNavigate();
     
-    const query = new URLSearchParams(location.search).get("q");
+    const id = new URLSearchParams(location.search).get("q");
 
     useEffect(() => {
-        setCurrentAddresseer(findAddresseerById(parseInt(query)));
-    }, [query, location])
+        const findAddresseer = async () => {
+            const addresseerObtained = await findAddresseerById(id);
+            setCurrentAddresseer(addresseerObtained);
+        }
+        
+        findAddresseer();
+    }, [id, location])
 
-    const edit = ({addresseer, cleanValues}) => {
+    const edit = ({addresseer}) => {
 
         const error = {};
 
@@ -71,7 +76,7 @@ const EditAddresseer = () => {
             <CCol sm={12} md={10} lg={8} xl={7}>
                 {
                     currentAddresseer &&
-                        <CCard>
+                        <CCard className="border-0 shadow-sm">
                             <CCardBody>
                                 <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                                     Editar destinatario
@@ -86,6 +91,7 @@ const EditAddresseer = () => {
                                     currentPhone={currentAddresseer.phone}
                                     currentCharge={currentAddresseer.charge}
                                     currentArea={currentAddresseer.area}
+                                    editable={true}
                                 />
                             </CCardBody>
                         </CCard>

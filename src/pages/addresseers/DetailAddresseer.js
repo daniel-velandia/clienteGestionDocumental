@@ -11,19 +11,22 @@ const DetailAddresseer = () => {
     const [addresseer, setAddresseer] = useState(null);
     const location = useLocation();
 
-    const query = new URLSearchParams(location.search).get("q");
+    const id = new URLSearchParams(location.search).get("q");
 
     useEffect(() => {
+        const findAddresseer = async () => {
+            const addresseerObtained = await findAddresseerById(id);
+            setAddresseer(addresseerObtained);
+        }
         
-        setAddresseer(findAddresseerById(parseInt(query)));
-        
-    }, [query, location]);
+        findAddresseer();
+    }, [id, location]);
 
     return (
     <CRow className="justify-content-center mb-4">
         <CCol xs={12} sm={4}>
         {addresseer && 
-            <CCard>
+            <CCard className="border-0 shadow-sm">
             <CCardHeader className="bg-danger text-white">
                 <CRow className="align-items-center">
                 <CCol xs={12} lg={7}>

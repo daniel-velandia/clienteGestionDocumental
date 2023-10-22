@@ -9,8 +9,8 @@ import { CSpinner } from '@coreui/react';
 import { ToastContainer } from 'react-toastify';
 
 const DefaultLayout = lazy(() => import('../layouts/DefaultLayout'));
-const Signin = lazy(() => import('../pages/Signin'));
-const Signup = lazy(() => import('../pages/Signup'));
+const Signin = lazy(() => import('../pages/user/Signin'));
+const Signup = lazy(() => import('../pages/user/Signup'));
 
 const loading = (
   <CSpinner className='my-spinner' color="danger"></CSpinner>

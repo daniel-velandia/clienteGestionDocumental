@@ -11,7 +11,8 @@ const CreateCompanyForm = ({
                     currentNit = "",
                     currentEmail = "",
                     currentPhone = "",
-                    currentSenderName = ""}) => {
+                    currentSenderName = "",
+                    editable = false}) => {
 
     const [nit, setNit] = useState(currentNit);
     const [companyName, setCompanyName] = useState(currentCompanyName);
@@ -32,14 +33,6 @@ const CreateCompanyForm = ({
 
     }
 
-    const cleanValues = () => {
-        setNit("");
-        setCompanyName("");
-        setEmail("");
-        setPhone("");
-        setSenderName("");
-    }
-
     const send = e => {
         e.preventDefault();
         
@@ -51,7 +44,7 @@ const CreateCompanyForm = ({
             senderName: senderName
         };
 
-        callback({company, cleanValues});
+        callback({company});
         
         validateForm(e);
     }
@@ -150,7 +143,7 @@ const CreateCompanyForm = ({
                 </CCol>
                 <CCol sm={12}>
                     <CButton type="submit" color="danger" className="mt-3 text-white w-100">
-                        Crear compañia
+                        {editable ? "Editar" : "Crear"} compañia
                     </CButton>
                 </CCol>
             </CRow>

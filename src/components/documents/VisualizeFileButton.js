@@ -8,10 +8,10 @@ const VisualizeFileButton = ({documentId}) => {
 
     const [pdfUrl, setPdfUrl] = useState("");
 
-    const visualizeFile = () => {
-        const document = findDocumentById(documentId);
-
-        setPdfUrl(URL.createObjectURL(document.file));
+    const visualizeFile = async () => {
+        const document = await findDocumentById(documentId);
+        const blobUrl = URL.createObjectURL(document.file);
+        setPdfUrl(blobUrl);
     };
 
     return (

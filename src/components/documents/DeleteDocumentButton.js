@@ -13,7 +13,7 @@ const DeleteDocumentButton = ({document}) => {
 
   const deleteDocument = () => {
     deleteDocumentById(document.documentId);
-    navigate("/");
+    navigate("/documents");
   }
 
   return (
@@ -26,13 +26,13 @@ const DeleteDocumentButton = ({document}) => {
           onClose={() => setVisible(false)}
           aria-labelledby="LiveDemoExampleLabel"
       >
-        <CModalHeader onClose={() => setVisible(false)}>
+        <CModalHeader className='border-0' onClose={() => setVisible(false)}>
           <CModalTitle id="LiveDemoExampleLabel">Eliminar documento</CModalTitle>
         </CModalHeader>
         <CModalBody>
           Estás seguro que quieres eliminar el documento {document.name}?
         </CModalBody>
-        <CModalFooter>
+        <CModalFooter className='border-0'>
             <CButton 
               color="secondary"
               className='text-white' 

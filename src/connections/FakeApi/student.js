@@ -1,27 +1,27 @@
 var students = [];
 
-function createStudent(student) {
+async function createStudent(student) {
   const studentId = Math.floor(Math.random() * 1000000) + 1;
-  student.studentId = studentId;
+  student.studentId = studentId.toString();
   students.push(student);
 }
 
-function readStudents() {
+async function readStudents() {
   return students;
 }
 
-function findStudentById(studentId) {
+async function findStudentById(studentId) {
   return students.find(student => student.studentId === studentId);
 }
 
-function updateStudentById(studentId, student) {
-  const currentStudent = findStudentById(studentId);
+async function updateStudentById(studentId, student) {
+  const currentStudent = await findStudentById(studentId);
   if (currentStudent) {
     Object.assign(currentStudent, student);
   }
 }
 
-function deleteStudentById(studentId) {
+async function deleteStudentById(studentId) {
   students = students.filter(student => student.studentId !== studentId);
 }
 

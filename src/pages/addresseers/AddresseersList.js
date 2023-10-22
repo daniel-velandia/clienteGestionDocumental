@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { CButton, CCol, CRow } from "@coreui/react"
+import { CButton, CCol, CRow, CTooltip } from "@coreui/react"
 import { readAddresseers } from "../../connections/FakeApi/addresseer";
 import CIcon from "@coreui/icons-react";
 import { cilPlus } from "@coreui/icons";
@@ -14,22 +14,33 @@ const AddresseersList = () => {
     const [addresseers, setAddresseers] = useState([]);
 
     useEffect(() => {
-        setAddresseers(readAddresseers());
+        const fetchAddresseers = async () => {
+            const addresseersObtained = await readAddresseers();
+            setAddresseers(addresseersObtained);
+        }
+
+        fetchAddresseers();
     }, [location])
 
     return (
         <div className="mb-3">
             <CRow>
-                <CCol xs="12" className="d-flex">
+                <CCol xs={12} className="d-flex justify-content-between">
                     <h1 className="my-3">Destinatarios</h1>
-                    <CButton 
-                        component={NavLink}
-                        to={`/addresseers/create`}
-                        color="link"
-                        className="h-100 d-flex align-items-center mt-1"
+                    <CTooltip
+                        content="Crear destinatario"
+                        placement="top"
                     >
-                        <CIcon icon={cilPlus} height={24} className="text-danger"/>
-                    </CButton>
+                        <CButton 
+                            component={NavLink}
+                            to={"/addresseers/create"}
+                            color="danger"
+                            shape="rounded-pill"
+                            className="my-btn-add"
+                        >
+                            <CIcon icon={cilPlus} height={24} className="text-white"/>
+                        </CButton>
+                    </CTooltip>
                 </CCol>
             </CRow>
             <CRow>

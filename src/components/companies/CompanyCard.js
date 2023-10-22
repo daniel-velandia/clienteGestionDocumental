@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom";
 const CompanyCard = ({company}) => {
 
     return (
-        <CCol md={6} lg={3}>
-            <CCard className="my-2">
+        <CCol xs={12} sm={6} lg={3}>
+            <CCard className="my-2 border-0 shadow-sm">
             <CCardBody>
                 <CCardTitle className="text-truncate">
                     <CButton 
                         color="link"
                         component={NavLink}
                         to={`/companies/detail?q=${company.companyId}`}
-                        className="my-card-title my-color-text-title"
+                        className="my-card-title text-danger"
                     >
                         {company.companyName}
                     </CButton>
@@ -20,8 +20,8 @@ const CompanyCard = ({company}) => {
                 <CCardSubtitle>
                     {company.senderName}
                 </CCardSubtitle>
-                <CCardText className="d-flex justify-content-end align-items-center mt-2">
-                    <CBadge color="danger"className="mx-1">NIT {company.nit}</CBadge>
+                <CCardText className="d-flex justify-content-end align-items-center mt-3">
+                    <CBadge color="secondary">NIT {company.nit}</CBadge>
                 </CCardText>
             </CCardBody>
             </CCard>

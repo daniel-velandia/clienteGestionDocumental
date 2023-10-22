@@ -32,6 +32,40 @@
     margin-top: -4px;
 }
 
+.my-btn-add {
+    padding: 8px !important;
+    height: 40px;
+    width: 40px;
+    border: none !important;
+    align-self: center;
+}
+
+.my-bg-light {
+    background: #F7F8F9 !important;
+}
+
+.form-switch {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    justify-content: space-between !important;
+    padding-left: 0 !important;
+}
+
+.form-check-label {
+    margin-right: 40px;
+    user-select: none;
+    width: fit-content;
+}
+
+.form-check-input:checked {
+    background-color: #e55353 !important;
+    border-color: #e55353 !important;
+}
+
+.form-check-input {
+    box-shadow: none !important;
+}
+
 .form-control, .form-select {
     background-color: #eeeeee !important;
     border: none !important;

@@ -8,7 +8,8 @@ const DocumentsSelect = ({errors, document, setDocument}) => {
 
     const [documents, setDocuments] = useState([]);
 
-    const getDocuments = (documentsObtained) => {
+    const fetchSelectArray = async () => {
+        const documentsObtained = await readDocuments();
 
         const initialSelectArray = [
             { label: 'Seleccione un documento', value: '' }
@@ -25,17 +26,18 @@ const DocumentsSelect = ({errors, document, setDocument}) => {
     }
 
     useEffect(() => {
+        const fetchDocuments = async () => {
+            const documentsObtained = await fetchSelectArray();
+            setDocuments(documentsObtained);
+        }
 
-        const documentsObtained = readDocuments();
-
-        setDocuments(getDocuments(documentsObtained));
-
+        fetchDocuments();
     }, []);
 
     return (
         <div>
         <CInputGroup className="mb-4">
-            <CInputGroupText className="border-0">
+            <CInputGroupText className="border-0 shadow-sm">
                 <CIcon icon={cilFile} />
             </CInputGroupText>
                 <CFormSelect 

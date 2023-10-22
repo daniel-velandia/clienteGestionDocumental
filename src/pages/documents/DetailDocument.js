@@ -13,17 +13,22 @@ const DetailDocument = () => {
     const [document, setDocument] = useState(null);
     const location = useLocation();
 
-    const query = new URLSearchParams(location.search).get("q");
+    const id = new URLSearchParams(location.search).get("q");
 
     useEffect(() => {
-        setDocument(findDocumentById(parseInt(query)));
-    }, [query, location]);
+        const findDocument = async () => {
+            const documentObtained = await findDocumentById(id);
+            setDocument(documentObtained);
+        }
+
+        findDocument();
+    }, [id, location]);
 
     return (
         <CRow className="justify-content-center mb-4">
         <CCol xs={12} sm={6}>
             {document && 
-                <CCard>
+                <CCard className="border-0 shadow-sm">
                 <CCardHeader className="bg-danger text-white">
                     <CRow className="align-items-center">
                     <CCol xs={12} lg={8}>
@@ -68,19 +73,11 @@ const DetailDocument = () => {
                         <strong>Remitente:</strong> 
                             <CButton
                                 component={NavLink}
-                                to={
-                                    document.studentSender ? 
-                                        `/students/detail?q=${document.studentSender}` : 
-                                        `/companies/detail?q=${document.companySender}`
-                                }
-                                className="text-decoration-none text-black my-link"
+                                to={`/${document.senderType == "student" ? "students" : "companies" }/detail?q=${document.sender}`}
+                                className="text-decoration-none text-danger my-link"
                                 color="link"
                             >
-                                {
-                                    document.studentSender ? 
-                                        document.studentSender : 
-                                        document.companySender
-                                }
+                                {document.sender}
                             </CButton>
                     </CListGroupItem>
                     <CListGroupItem>
@@ -88,7 +85,7 @@ const DetailDocument = () => {
                         <CButton
                             component={NavLink}
                             to={`/addresseers/detail?q=${document.addresseer}`}
-                            className="text-decoration-none text-black my-link"
+                            className="text-decoration-none text-danger my-link"
                             color="link"
                         >
                             {document.addresseer}
@@ -102,7 +99,7 @@ const DetailDocument = () => {
                                 <CButton
                                     component={NavLink}
                                     to={`/documents/detail?q=${document.responseDocument}`}
-                                    className="text-decoration-none text-black my-link"
+                                    className="text-decoration-none text-danger my-link"
                                     color="link"
                                 >
                                     {document.responseDocument}

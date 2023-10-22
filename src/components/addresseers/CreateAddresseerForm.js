@@ -13,7 +13,8 @@ const CreateAddresseerForm = ({
                     currentEmail = "",
                     currentPhone = "",
                     currentCharge = "",
-                    currentArea = ""}) => {
+                    currentArea = "",
+                    editable = false}) => {
 
     const [identification, setIdentification] = useState(currentIdentification);
     const [name, setName] = useState(currentName);
@@ -36,16 +37,6 @@ const CreateAddresseerForm = ({
 
     }
 
-    const cleanValues = () => {
-        setIdentification("");
-        setName("");
-        setLastName("");
-        setEmail("");
-        setPhone("");
-        setCharge("");
-        setArea("");
-    }
-
     const send = e => {
         e.preventDefault();
         
@@ -59,7 +50,7 @@ const CreateAddresseerForm = ({
             area: area
         };
 
-        callback({addresseer, cleanValues});
+        callback({addresseer});
         
         validateForm(e);
     }
@@ -83,7 +74,6 @@ const CreateAddresseerForm = ({
                             aria-describedby="identificación"
                             feedbackInvalid={errors.identification}
                             invalid={errors.isIdentificationInvalid}
-                            defaultValue={currentIdentification}
                             value={identification}
                             onChange={e => setIdentification(e.target.value)}
                         />
@@ -193,7 +183,7 @@ const CreateAddresseerForm = ({
                 </CCol>
                 <CCol sm={12}>
                     <CButton type="submit" color="danger" className="mt-3 text-white w-100">
-                        Crear destinatario
+                        {editable ? "Editar" : "Crear"} destinatario
                     </CButton>
                 </CCol>
             </CRow>

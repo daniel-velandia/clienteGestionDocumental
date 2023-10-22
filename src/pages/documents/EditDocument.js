@@ -14,13 +14,18 @@ const EditDocument = () => {
     const location = useLocation();
     const navigation = useNavigate();
 
-    const query = new URLSearchParams(location.search).get("q");
+    const id = new URLSearchParams(location.search).get("q");
 
     useEffect(() => {
-        setCurrentDocument(findDocumentById(parseInt(query)));
-    }, [query, location])
+        const fetchDocuments = async () => {
+            const documentObtained = await findDocumentById(id);
+            setCurrentDocument(documentObtained);
+        }
 
-    const edit = ({document, cleanValues}) => {
+        fetchDocuments();
+    }, [id, location])
+
+    const edit = ({document}) => {
 
         const error = {};
 
@@ -54,9 +59,13 @@ const EditDocument = () => {
             error.isAddresseerInvalid = true;
         }
 
-        if((validator.isEmpty(document.studentSender) && validator.isEmpty(document.companySender)) ||
-                (!validator.isEmpty(document.studentSender) && !validator.isEmpty(document.companySender))) {
-            error.sender = 'Debe seleccionar un remitente (estudiante o empresa)';
+        if(validator.isEmpty(document.senderType)) {
+            error.senderType = 'Debe seleccionar un tipo de remitente';
+            error.isSenderTypeInvalid = true;
+        }
+
+        if(validator.isEmpty(document.sender)) {
+            error.sender = 'Debe seleccionar un remitente';
             error.isSenderInvalid = true;
         }
 
@@ -73,7 +82,7 @@ const EditDocument = () => {
             setErrors(error);
         } else {
             updateDocumentById(currentDocument.documentId, document);
-            navigation("/");
+            navigation("/documents");
         }
     };
 
@@ -82,7 +91,7 @@ const EditDocument = () => {
             <CCol sm={12} md={10} lg={8} xl={7}>
                 {
                     currentDocument &&
-                        <CCard>
+                        <CCard className="border-0 shadow-sm">
                             <CCardBody>
                                 <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                                     Editar documento
@@ -98,11 +107,12 @@ const EditDocument = () => {
                                     currentSubject={currentDocument.subject}
                                     currentAnnexes={currentDocument.annexes}
                                     currentRequiresResponse={currentDocument.requiresResponse}
-                                    currentStudentSender={currentDocument.studentSender}
-                                    currentCompanySender={currentDocument.companySender}
-                                    currentaddresseer={currentDocument.addresseer}
+                                    currentSenderType={currentDocument.senderType}
+                                    currentSender={currentDocument.sender}
+                                    currentAddresseer={currentDocument.addresseer}
                                     currentResponseDocument={currentDocument.responseDocument}
                                     currentInformAddresseer={currentDocument.informAddresseer}
+                                    editable={true}
                                 />
                             </CCardBody>
                         </CCard>

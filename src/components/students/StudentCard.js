@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom";
 const StudentCard = ({student}) => {
 
     return (
-        <CCol md={6} lg={3}>
-            <CCard className="my-2">
+        <CCol xs={12} sm={4} lg={3}>
+            <CCard className="my-2 border-0 shadow-sm">
             <CCardBody>
                 <CCardTitle className="text-truncate">
                     <CButton 
                         color="link"
                         component={NavLink}
                         to={`/students/detail?q=${student.studentId}`}
-                        className="my-card-title my-color-text-title"
+                        className="my-card-title text-danger"
                     >
                         {student.name} {student.lastName}
                     </CButton>
@@ -20,8 +20,8 @@ const StudentCard = ({student}) => {
                 <CCardSubtitle>
                     {`${student.career} - semestre ${student.semester}`}
                 </CCardSubtitle>
-                <CCardText className="d-flex justify-content-end align-items-center mt-2">
-                    <CBadge color="danger"className="mx-1">D.I {student.identification}</CBadge>
+                <CCardText className="d-flex justify-content-end align-items-center mt-3">
+                    <CBadge color="secondary">D.I {student.identification}</CBadge>
                 </CCardText>
             </CCardBody>
             </CCard>

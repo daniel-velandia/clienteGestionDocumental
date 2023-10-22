@@ -34,7 +34,7 @@ const StudentsSelect = ({errors, student, setStudent}) => {
 
     return (
         <CInputGroup className="mb-4">
-            <CInputGroupText className="border-0">
+            <CInputGroupText className="border-0 shadow-sm">
                 <CIcon icon={cilUser} />
             </CInputGroupText>
                 <CFormSelect 

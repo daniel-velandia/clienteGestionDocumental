@@ -13,13 +13,18 @@ const EditCompany = () => {
     const location = useLocation();
     const navigation = useNavigate();
     
-    const query = new URLSearchParams(location.search).get("q");
+    const id = new URLSearchParams(location.search).get("q");
 
     useEffect(() => {
-        setCurrentCompany(findCompanyById(parseInt(query)));
-    }, [query, location])
+        const findCompany = async () => {
+            const companyObtained = await findCompanyById(id);
+            setCurrentCompany(companyObtained);
+        }
+  
+        findCompany();
+    }, [id, location])
 
-    const edit = async ({company, cleanValues}) => {
+    const edit = async ({company}) => {
 
         const error = {};
 
@@ -61,7 +66,7 @@ const EditCompany = () => {
             <CCol sm={12} md={10} lg={8} xl={7}>
                 {
                     currentCompany &&
-                        <CCard>
+                        <CCard className="border-0 shadow-sm">
                             <CCardBody>
                                 <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                                     Editar compañia
@@ -74,6 +79,7 @@ const EditCompany = () => {
                                     currentEmail={currentCompany.email}
                                     currentPhone={currentCompany.phone}
                                     currentSenderName={currentCompany.senderName}
+                                    editable={true}
                                 />
                             </CCardBody>
                         </CCard>

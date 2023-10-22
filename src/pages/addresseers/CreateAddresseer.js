@@ -1,16 +1,17 @@
 import validator from "validator";
-import { toast } from "react-toastify";
 import { useState } from "react";
 import { CCard, CCardBody, CCardTitle, CCol, CRow } from "@coreui/react";
 import { CreateAddresseerForm } from "../../components/addresseers/CreateAddresseerForm";
 import { isEmptyObject } from "../../connections/helpers/isEmptyObject";
 import { createAddresseer } from "../../connections/FakeApi/addresseer";
+import { useNavigate } from "react-router-dom";
 
 const CreateAddresseer = () => {
     
     const [errors, setErrors] = useState({});
+    const navigation = useNavigate();
 
-    const create = ({addresseer, cleanValues}) => {
+    const create = ({addresseer}) => {
 
         const error = {};
 
@@ -53,20 +54,14 @@ const CreateAddresseer = () => {
             setErrors(error);
         } else {
             createAddresseer(addresseer);
-
-            toast.info(`Destinatario ${addresseer.name} ${addresseer.lastName} creado con exito`, {
-                position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000
-            });
-
-            setErrors({});
-            cleanValues();
+            navigation("/addresseers");
         }
     };
     
     return (
         <CRow className="justify-content-center mb-3">
             <CCol sm={12} md={10} lg={8} xl={7}>
-                <CCard>
+                <CCard className="border-0 shadow-sm">
                     <CCardBody>
                         <CCardTitle component="h2" className="d-flex justify-content-center mb-4">
                             Crear destinatario

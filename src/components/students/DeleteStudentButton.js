@@ -26,13 +26,13 @@ const DeleteStudentButton = ({student}) => {
           onClose={() => setVisible(false)}
           aria-labelledby="LiveDemoExampleLabel"
       >
-        <CModalHeader onClose={() => setVisible(false)}>
+        <CModalHeader className='border-0' onClose={() => setVisible(false)}>
           <CModalTitle id="LiveDemoExampleLabel">Eliminar estudiante</CModalTitle>
         </CModalHeader>
         <CModalBody>
           {`Estás seguro que quieres eliminar el estudiante ${student.name} ${student.lastName}?`}
         </CModalBody>
-        <CModalFooter>
+        <CModalFooter className='border-0'>
             <CButton 
               color="secondary"
               className='text-white' 

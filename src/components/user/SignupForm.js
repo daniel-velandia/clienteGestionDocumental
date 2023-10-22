@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CButton, CForm, CFormInput, CInputGroup, CInputGroupText } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilAt, cilLockLocked, cilUser } from '@coreui/icons'
-import { isEmptyObject } from "../connections/helpers/isEmptyObject";
+import { isEmptyObject } from "../../connections/helpers/isEmptyObject";
 
 const SignupForm = ({errors, callback}) => {
     
@@ -48,7 +48,7 @@ const SignupForm = ({errors, callback}) => {
             <h1>Registro</h1>
             <p className="text-medium-emphasis">Crea una cuenta</p>
             <CInputGroup className="mb-3">
-                <CInputGroupText className="border-0">
+                <CInputGroupText className="border-0 shadow-sm">
                     <CIcon icon={cilUser} />
                 </CInputGroupText>
                 <CFormInput 
@@ -62,7 +62,7 @@ const SignupForm = ({errors, callback}) => {
                 />
             </CInputGroup>
             <CInputGroup className="mb-3">
-                <CInputGroupText className="border-0">
+                <CInputGroupText className="border-0 shadow-sm">
                     <CIcon icon={cilAt} />
                 </CInputGroupText>
                 <CFormInput 
@@ -76,7 +76,7 @@ const SignupForm = ({errors, callback}) => {
                 />
             </CInputGroup>
             <CInputGroup className="mb-3">
-                <CInputGroupText className="border-0">
+                <CInputGroupText className="border-0 shadow-sm">
                     <CIcon icon={cilLockLocked} />
                 </CInputGroupText>
                 <CFormInput
@@ -91,7 +91,7 @@ const SignupForm = ({errors, callback}) => {
                 />
             </CInputGroup>
             <CInputGroup className="mb-4">
-                <CInputGroupText className="border-0">
+                <CInputGroupText className="border-0 shadow-sm">
                     <CIcon icon={cilLockLocked} />
                 </CInputGroupText>
                 <CFormInput
